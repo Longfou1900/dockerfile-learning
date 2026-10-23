@@ -1,0 +1,118 @@
+➜  ~ docker volume create portainer_data
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+➜  ~ docker volume create portainer_data
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+➜  ~ bash 
+docker volume create portainer_data
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+
+vagrant@ubuntu-jammy:~$ docker ps
+permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+vagrant@ubuntu-jammy:~$ docker restart
+docker: 'docker restart' requires at least 1 argument
+
+Usage:  docker restart [OPTIONS] CONTAINER [CONTAINER...]
+
+See 'docker restart --help' for more information
+vagrant@ubuntu-jammy:~$ git clone https://github.com/keoKAY/reactjs-devop8-template.git dockerfile-learning
+Cloning into 'dockerfile-learning'...
+remote: Enumerating objects: 623, done.
+remote: Counting objects: 100% (245/245), done.
+remote: Compressing objects: 100% (106/106), done.
+remote: Total 623 (delta 222), reused 139 (delta 139), pack-reused 378 (from 2)
+Receiving objects: 100% (623/623), 484.58 KiB | 513.00 KiB/s, done.
+Resolving deltas: 100% (316/316), done.
+vagrant@ubuntu-jammy:~$ cd dockerfile-learning/
+vagrant@ubuntu-jammy:~/dockerfile-learning$ ls
+Dockerfile   README.md    docker-compose.yaml  openshift.Dockerfile  package.json     public  tempCodeRunnerFile.js
+Jenkinsfile  autopush.sh  nginx.conf           package-lock.json     prod.Dockerfile  src
+vagrant@ubuntu-jammy:~/dockerfile-learning$ ll * docker
+ls: cannot access 'docker': No such file or directory
+-rw-rw-r-- 1 vagrant vagrant     189 Oct 22 13:15 Dockerfile
+-rw-rw-r-- 1 vagrant vagrant     826 Oct 22 13:15 Jenkinsfile
+-rw-rw-r-- 1 vagrant vagrant    1050 Oct 22 13:15 README.md
+-rw-rw-r-- 1 vagrant vagrant     194 Oct 22 13:15 autopush.sh
+-rw-rw-r-- 1 vagrant vagrant     555 Oct 22 13:15 docker-compose.yaml
+-rw-rw-r-- 1 vagrant vagrant     356 Oct 22 13:15 nginx.conf
+-rw-rw-r-- 1 vagrant vagrant     762 Oct 22 13:15 openshift.Dockerfile
+-rw-rw-r-- 1 vagrant vagrant 1344782 Oct 22 13:15 package-lock.json
+-rw-rw-r-- 1 vagrant vagrant    1396 Oct 22 13:15 package.json
+-rw-rw-r-- 1 vagrant vagrant     405 Oct 22 13:15 prod.Dockerfile
+-rw-rw-r-- 1 vagrant vagrant     297 Oct 22 13:15 tempCodeRunnerFile.js
+
+public:
+total 44
+drwxrwxr-x 2 vagrant vagrant 4096 Oct 22 13:15 ./
+drwxrwxr-x 6 vagrant vagrant 4096 Oct 22 13:15 ../
+-rw-rw-r-- 1 vagrant vagrant 3870 Oct 22 13:15 favicon.ico
+-rw-rw-r-- 1 vagrant vagrant 1727 Oct 22 13:15 index.html
+-rw-rw-r-- 1 vagrant vagrant 5347 Oct 22 13:15 logo192.png
+-rw-rw-r-- 1 vagrant vagrant 9664 Oct 22 13:15 logo512.png
+-rw-rw-r-- 1 vagrant vagrant  492 Oct 22 13:15 manifest.json
+-rw-rw-r-- 1 vagrant vagrant   67 Oct 22 13:15 robots.txt
+
+src:
+total 60
+drwxrwxr-x 7 vagrant vagrant 4096 Oct 22 13:15 ./
+drwxrwxr-x 6 vagrant vagrant 4096 Oct 22 13:15 ../
+-rw-rw-r-- 1 vagrant vagrant  564 Oct 22 13:15 App.css
+-rw-rw-r-- 1 vagrant vagrant 2690 Oct 22 13:15 App.js
+-rw-rw-r-- 1 vagrant vagrant  909 Oct 22 13:15 App.test.js
+drwxrwxr-x 4 vagrant vagrant 4096 Oct 22 13:15 components/
+-rw-rw-r-- 1 vagrant vagrant  366 Oct 22 13:15 index.css
+-rw-rw-r-- 1 vagrant vagrant  535 Oct 22 13:15 index.js
+-rw-rw-r-- 1 vagrant vagrant 2632 Oct 22 13:15 logo.svg
+drwxrwxr-x 3 vagrant vagrant 4096 Oct 22 13:15 pages/
+-rw-rw-r-- 1 vagrant vagrant  362 Oct 22 13:15 reportWebVitals.js
+drwxrwxr-x 2 vagrant vagrant 4096 Oct 22 13:15 services/
+-rw-rw-r-- 1 vagrant vagrant  241 Oct 22 13:15 setupTests.js
+drwxrwxr-x 2 vagrant vagrant 4096 Oct 22 13:15 styles/
+drwxrwxr-x 2 vagrant vagrant 4096 Oct 22 13:15 utils/
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker build -t normal-reactjs .
+ERROR: permission denied while trying to connect to the docker API at unix:///var/run/docker.sock
+vagrant@ubuntu-jammy:~/dockerfile-learning$ whoami
+vagrant
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo usermod -aG docker $USER
+newgrp docker
+➜  dockerfile-learning git:(master) ✗ docker ps                          
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+➜  dockerfile-learning git:(master) ✗ docker build -t normal-reactjs .
+[+] Building 512.2s (12/12) FINISHED                                                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                     0.1s
+ => => transferring dockerfile: 236B                                                                                                                                     0.0s
+ => [internal] load metadata for docker.io/library/node:22-alpine                                                                                                        8.0s
+ => [internal] load .dockerignore                                                                                                                                        0.1s
+ => => transferring context: 2B                                                                                                                                          0.0s
+ => [1/7] FROM docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914                                                123.4s
+ => => resolve docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914                                                  0.1s
+ => => sha256:304511616d6a6d472222f696b9045e20dc90e8043b2a8ba2acb61746595781f3 442B / 442B                                                                               1.5s
+ => => sha256:7246d4c6a55dd0f8dd00d2e63aece3a68d91e6a5d04c4e748fc2706897d96312 1.26MB / 1.26MB                                                                           5.2s
+ => => sha256:8776aa3d2ba7247a375d06dcec03856b99dbb0e16e904a5672d3bf08c852d4f1 56.22MB / 56.22MB                                                                       118.5s
+ => => sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788 3.85MB / 3.85MB                                                                         503.2s
+ => => extracting sha256:7b229517ed222597277036d94892173207d01a731ab3a88eeb1de2e963a2c788                                                                                0.7s
+ => => extracting sha256:8776aa3d2ba7247a375d06dcec03856b99dbb0e16e904a5672d3bf08c852d4f1                                                                                3.9s
+ => => extracting sha256:7246d4c6a55dd0f8dd00d2e63aece3a68d91e6a5d04c4e748fc2706897d96312                                                                                0.3s
+ => => extracting sha256:304511616d6a6d472222f696b9045e20dc90e8043b2a8ba2acb61746595781f3                                                                                0.1s
+ => [internal] load build context                                                                                                                                        0.4s
+ => => transferring context: 2.05MB                                                                                                                                      0.2s
+ => [2/7] WORKDIR /app                                                                                                                                                   2.8s
+ => [3/7] COPY package*.json ./                                                                                                                                          0.2s
+ => [4/7] RUN npm install --force                                                                                                                                      116.6s
+ => [5/7] COPY . .                                                                                                                                                       1.2s 
+ => [6/7] RUN npm run build                                                                                                                                             85.9s 
+ => [7/7] RUN npm install -g serve                                                                                                                                      22.1s 
+ => exporting to image                                                                                                                                                 150.8s 
+ => => exporting layers                                                                                                                                                111.8s 
+ => => exporting manifest sha256:25d66620b8a3de60fe3fe52cd3fc7835f0e5314ff61baa1ddf2c3e037c6c3d21                                                                        0.0s 
+ => => exporting config sha256:fb074d4d1ef84605af0e7cee26e1dc777e541771b111be232b0f3962d85810f7                                                                          0.0s 
+ => => exporting attestation manifest sha256:b0d6bf83cfd8a30a2321ad300ada966b59c746d359d52251021e7f0296a122b0                                                            0.1s
+ => => exporting manifest list sha256:9d9766b544b0ae494f1de9bcb058a0d2523bf72b63079d97bdcabcedc2538ce3                                                                   0.0s
+ => => naming to docker.io/library/normal-reactjs:latest                                                                                                                 0.1s
+ => => unpacking to docker.io/library/normal-reactjs:latest                                                                                                             38.6s
+➜  dockerfile-learning git:(master) ✗ 
+➜  dockerfile-learning git:(master) ✗ docker build -t prod-reactjs -f prod.Dockerfile .
