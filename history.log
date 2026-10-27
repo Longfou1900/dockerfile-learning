@@ -116,3 +116,500 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
  => => unpacking to docker.io/library/normal-reactjs:latest                                                                                                             38.6s
 ➜  dockerfile-learning git:(master) ✗ 
 ➜  dockerfile-learning git:(master) ✗ docker build -t prod-reactjs -f prod.Dockerfile .
+
+26-10-2026
+vagrant@ubuntu-jammy:~$ pwd
+/home/vagrant
+vagrant@ubuntu-jammy:~$ cd dockerfile-learning/
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker build -t longfou/ite3-reactjs:latest -f prod.Dockerfile
+ERROR: docker: 'docker buildx build' requires 1 argument
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Run 'docker buildx build --help' for more information
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker build -t longfou/ite3-reactjs:latest -f prod.Dockerfile .
+[+] Building 135.1s (10/15)                                                                          docker:default
+[+] Building 136.5s (10/15)                                                                          docker:default
+[+] Building 136.9s (10/15)                                                                          docker:default
+[+] Building 137.1s (10/15)                                                                          docker:default
+[+] Building 137.2s (10/15)                                                                          docker:default
+[+] Building 137.4s (10/15)                                                                          docker:default
+[+] Building 137.5s (10/15)                                                                          docker:default
+[+] Building 137.7s (10/15)                                                                          docker:default
+[+] Building 137.8s (10/15)                                                                          docker:default
+[+] Building 138.9s (10/15)                                                                          docker:default
+[+] Building 139.0s (10/15)                                                                          docker:default
+[+] Building 139.2s (10/15)                                                                          docker:default
+[+] Building 139.5s (10/15)                                                                          docker:default
+[+] Building 139.6s (10/15)                                                                          docker:default
+[+] Building 139.9s (10/15)                                                                          docker:default
+[+] Building 140.1s (10/15)                                                                          docker:default
+[+] Building 140.2s (10/15)                                                                          docker:default
+[+] Building 140.4s (10/15)                                                                          docker:default
+[+] Building 140.5s (10/15)                                                                          docker:default
+[+] Building 140.7s (10/15)                                                                          docker:default
+[+] Building 140.8s (10/15)                                                                          docker:default
+[+] Building 141.0s (10/15)                                                                          docker:default
+[+] Building 141.1s (10/15)                                                                          docker:default
+[+] Building 141.4s (10/15)                                                                          docker:default
+[+] Building 141.6s (10/15)                                                                          docker:default
+[+] Building 141.7s (10/15)                                                                          docker:default
+[+] Building 141.9s (10/15)                                                                          docker:default
+[+] Building 142.2s (10/15)                                                                          docker:default
+[+] Building 142.4s (10/15)                                                                          docker:default
+[+] Building 142.5s (10/15)                                                                          docker:default
+[+] Building 142.7s (10/15)                                                                          docker:default
+[+] Building 142.9s (10/15)                                                                          docker:default
+[+] Building 143.0s (10/15)                                                                          docker:default
+[+] Building 407.1s (16/16) FINISHED                                                                 docker:default
+ => [internal] load build definition from prod.Dockerfile                                                      0.0s
+ => => transferring dockerfile: 449B                                                                           0.0s
+ => [internal] load metadata for docker.io/library/node:alpine                                                 5.4s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                5.4s
+ => [internal] load .dockerignore                                                                              0.0s
+ => => transferring context: 2B                                                                                0.0s
+ => [builder 1/7] FROM docker.io/library/node:alpine@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a6  116.4s
+ => => resolve docker.io/library/node:alpine@sha256:40cd011b55415bc894e45b02fdd5a5dfde056921b7d23a64c74f80497  0.1s
+ => => sha256:0108e084aaece04cd97188e41f387bd9bd0bdf1ce46ebdba145bf6b17e6739e8 441B / 441B                     0.6s
+ => => sha256:c2b34093fa7fd4863fa8962a46a696ce09ad5e06cc002b1a135eaf2fe9b4c457 59.09MB / 59.09MB             109.8s
+ => => extracting sha256:c2b34093fa7fd4863fa8962a46a696ce09ad5e06cc002b1a135eaf2fe9b4c457                      6.0s
+ => => extracting sha256:0108e084aaece04cd97188e41f387bd9bd0bdf1ce46ebdba145bf6b17e6739e8                      0.1s
+ => [stage-1 1/3] FROM docker.io/library/nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df0124  58.4s
+ => => resolve docker.io/library/nginx:alpine@sha256:a3554c0d0b48177b1413c26e01f695334428020d9df01243fbae3e11  0.1s
+ => => sha256:b9b388a21ecfde6ac80505f23f527146a2129dfb104e79b029bbd00d4cc1a919 20.53MB / 20.53MB              54.9s
+ => => sha256:9b0f7dfe35b2711a17f60dadd6d4035dc0cdee152538cc5c0987029e94679548 1.40kB / 1.40kB                 1.7s
+ => => sha256:2ec5fb117ffa9a78b15fb6a78745ffc569c8da0aee9f36ace4cd67a44b1fef79 1.21kB / 1.21kB                 2.0s
+ => => sha256:26185d08a3ec318dd85a6c9f2172e714ec13cececd7f33c533b40b1689f9fedb 404B / 404B                     0.9s
+ => => sha256:7cc330898115ce55acccb0cc1e7dd091df4410c8c5f3c540710ee0ac689f5fcb 964B / 964B                     0.7s
+ => => sha256:657023555a2a19dc6036468198bb350d2c7feaac7f2d0a3901b4dd3cb25e40c5 629B / 629B                     0.9s
+ => => sha256:12b85cff06fd7d383d36a9c96503fe049c9d4bf3dfda5cbb9ffa6ae99b9c07a6 1.94MB / 1.94MB                11.1s
+ => => extracting sha256:12b85cff06fd7d383d36a9c96503fe049c9d4bf3dfda5cbb9ffa6ae99b9c07a6                      0.6s
+ => => extracting sha256:657023555a2a19dc6036468198bb350d2c7feaac7f2d0a3901b4dd3cb25e40c5                      0.2s
+ => => extracting sha256:7cc330898115ce55acccb0cc1e7dd091df4410c8c5f3c540710ee0ac689f5fcb                      0.2s
+ => => extracting sha256:26185d08a3ec318dd85a6c9f2172e714ec13cececd7f33c533b40b1689f9fedb                      0.2s
+ => => extracting sha256:2ec5fb117ffa9a78b15fb6a78745ffc569c8da0aee9f36ace4cd67a44b1fef79                      0.1s
+ => => extracting sha256:9b0f7dfe35b2711a17f60dadd6d4035dc0cdee152538cc5c0987029e94679548                      0.1s
+ => => extracting sha256:b9b388a21ecfde6ac80505f23f527146a2129dfb104e79b029bbd00d4cc1a919                      2.7s
+ => [internal] load build context                                                                              0.2s
+ => => transferring context: 2.40kB                                                                            0.1s
+ => [stage-1 2/3] COPY nginx.conf /etc/nginx/conf.d/default.conf                                              12.4s
+ => [builder 2/7] WORKDIR /app                                                                                 2.2s
+ => [builder 3/7] COPY package*.json ./                                                                        0.2s
+ => [builder 4/7] RUN npm i                                                                                  187.3s
+ => [builder 5/7] COPY src ./src                                                                               2.6s
+ => [builder 6/7] COPY public ./public                                                                         0.1s
+ => [builder 7/7] RUN npm run build                                                                           81.7s
+ => [stage-1 3/3] COPY --from=builder /app/build /usr/share/nginx/html                                         0.4s
+ => exporting to image                                                                                         4.7s
+ => => exporting layers                                                                                        1.5s
+ => => exporting manifest sha256:e46ba458724ca8f8c2e96756413ef83d6828e48fd3e476a92efc122ae8636716              0.0s
+ => => exporting config sha256:d78eb4731b0bb90322c0b212f679e5ce82054d6ad157d09b8fb59e602a1ceb2e                0.0s
+ => => exporting attestation manifest sha256:a24712d6b57114b72db26a3cfb5432ecbca2049313b4e65d982de8053e8ac66b  0.1s
+ => => exporting manifest list sha256:7d17d69c4014a8468adaf1ac3ca802de5237ea0ff207fbdfad6b53f705cc06e0         0.0s
+ => => naming to docker.io/longfou/ite3-reactjs:latest                                                         0.0s
+ => => unpacking to docker.io/longfou/ite3-reactjs:latest                                                      2.7s
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED        STATUS        PORTS     NAMES
+6701f07d54c2   alpine    "ash"     32 hours ago   Up 32 hours             bridge-web-2
+4f2afe60b2bc   alpine    "ash"     32 hours ago   Up 32 hours             bridge-web-1
+754a0944647e   alpine    "ash"     33 hours ago   Up 33 hours             bridge-test-2
+6affe45a6912   alpine    "ash"     33 hours ago   Up 33 hours             bridge-test-1
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED        STATUS                   PORTS     NAMES
+6701f07d54c2   alpine        "ash"      32 hours ago   Up 32 hours                        bridge-web-2
+4f2afe60b2bc   alpine        "ash"      32 hours ago   Up 32 hours                        bridge-web-1
+754a0944647e   alpine        "ash"      33 hours ago   Up 33 hours                        bridge-test-2
+6affe45a6912   alpine        "ash"      33 hours ago   Up 33 hours                        bridge-test-1
+474abc5afc53   hello-world   "/hello"   2 weeks ago    Exited (0) 2 weeks ago             dazzling_brahmagupta
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker container prune
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+474abc5afc53f11f038a2e53e88ebb20b469972662b23c46fdf5350259c26970
+
+Total reclaimed space: 4.096kB
+vagrant@ubuntu-jammy:~/dockerfile-learning$ ll
+total 1400
+drwxrwxr-x  6 vagrant vagrant    4096 Oct 22 13:29 ./
+drwxr-x--- 14 vagrant vagrant    4096 Oct 26 00:55 ../
+-rw-rw-r--  1 vagrant vagrant      15 Oct 22 13:15 .env
+drwxrwxr-x  8 vagrant vagrant    4096 Oct 23 13:14 .git/
+drwxrwxr-x  3 vagrant vagrant    4096 Oct 22 13:15 .github/
+-rw-rw-r--  1 vagrant vagrant     330 Oct 22 13:15 .gitignore
+-rw-rw-r--  1 vagrant vagrant     197 Oct 22 13:22 Dockerfile
+-rw-rw-r--  1 vagrant vagrant     826 Oct 22 13:15 Jenkinsfile
+-rw-rw-r--  1 vagrant vagrant    1050 Oct 22 13:15 README.md
+-rw-rw-r--  1 vagrant vagrant     194 Oct 22 13:15 autopush.sh
+-rw-rw-r--  1 vagrant vagrant     555 Oct 22 13:15 docker-compose.yaml
+-rw-rw-r--  1 vagrant vagrant   10272 Oct 22 13:44 history.log
+-rw-rw-r--  1 vagrant vagrant     356 Oct 22 13:15 nginx.conf
+-rw-rw-r--  1 vagrant vagrant     762 Oct 22 13:15 openshift.Dockerfile
+-rw-rw-r--  1 vagrant vagrant 1344782 Oct 22 13:15 package-lock.json
+-rw-rw-r--  1 vagrant vagrant    1396 Oct 22 13:15 package.json
+-rw-rw-r--  1 vagrant vagrant     405 Oct 22 13:15 prod.Dockerfile
+drwxrwxr-x  2 vagrant vagrant    4096 Oct 22 13:15 public/
+drwxrwxr-x  7 vagrant vagrant    4096 Oct 22 13:15 src/
+-rw-rw-r--  1 vagrant vagrant     297 Oct 22 13:15 tempCodeRunnerFile.js
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker image
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker images
+                                                                                                i Info →   U  In Use
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+alpine:latest                 be2656061b53         13MB         3.94MB    U   
+hello-world:latest            5e2309035332       25.9kB         9.49kB        
+longfou/ite3-reactjs:latest   7d17d69c4014        104MB         28.5MB        
+normal-reactjs:latest         9d9766b544b0       1.22GB          255MB        
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker run -dp 3000:80 --name reactjs-cont longfou/ite3-reactjs
+54b5a25076e9e50ea5d1019fdf9b196290a806334ee31688cf148edd2eb0ddb0
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                     NAMES
+54b5a25076e9   longfou/ite3-reactjs   "nginx -g 'daemon of…"   8 seconds ago   Up 7 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   reactjs-cont
+6701f07d54c2   alpine                 "ash"                    32 hours ago    Up 32 hours                                              bridge-web-2
+4f2afe60b2bc   alpine                 "ash"                    32 hours ago    Up 32 hours                                              bridge-web-1
+754a0944647e   alpine                 "ash"                    33 hours ago    Up 33 hours                                              bridge-test-2
+6affe45a6912   alpine                 "ash"                    33 hours ago    Up 33 hours                                              bridge-test-1
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps -a
+CONTAINER ID   IMAGE                  COMMAND                  CREATED              STATUS              PORTS                                     NAMES
+54b5a25076e9   longfou/ite3-reactjs   "nginx -g 'daemon of…"   About a minute ago   Up About a minute   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   reactjs-cont
+6701f07d54c2   alpine                 "ash"                    32 hours ago         Up 32 hours                                                   bridge-web-2
+4f2afe60b2bc   alpine                 "ash"                    32 hours ago         Up 32 hours                                                   bridge-web-1
+754a0944647e   alpine                 "ash"                    33 hours ago         Up 33 hours                                                   bridge-test-2
+6affe45a6912   alpine                 "ash"                    33 hours ago         Up 33 hours                                                   bridge-test-1
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps -a
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                     NAMES
+54b5a25076e9   longfou/ite3-reactjs   "nginx -g 'daemon of…"   4 minutes ago   Up 4 minutes   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   reactjs-cont
+6701f07d54c2   alpine                 "ash"                    32 hours ago    Up 32 hours                                              bridge-web-2
+4f2afe60b2bc   alpine                 "ash"                    32 hours ago    Up 32 hours                                              bridge-web-1
+754a0944647e   alpine                 "ash"                    33 hours ago    Up 33 hours                                              bridge-test-2
+6affe45a6912   alpine                 "ash"                    33 hours ago    Up 33 hours                                              bridge-test-1
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED         STATUS         PORTS                                     NAMES
+54b5a25076e9   longfou/ite3-reactjs   "nginx -g 'daemon of…"   4 minutes ago   Up 4 minutes   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   reactjs-cont
+6701f07d54c2   alpine                 "ash"                    32 hours ago    Up 32 hours                                              bridge-web-2
+4f2afe60b2bc   alpine                 "ash"                    32 hours ago    Up 32 hours                                              bridge-web-1
+754a0944647e   alpine                 "ash"                    33 hours ago    Up 33 hours                                              bridge-test-2
+6affe45a6912   alpine                 "ash"                    33 hours ago    Up 33 hours                                              bridge-test-1
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl localhost:3000
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>EarthDx Website</title><script defer="defer" src="/static/js/main.e05ea917.js"></script><link href="/static/css/main.a201afda.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ ll
+total 1400
+drwxrwxr-x  6 vagrant vagrant    4096 Oct 22 13:29 ./
+drwxr-x--- 14 vagrant vagrant    4096 Oct 26 00:55 ../
+-rw-rw-r--  1 vagrant vagrant      15 Oct 22 13:15 .env
+drwxrwxr-x  8 vagrant vagrant    4096 Oct 23 13:14 .git/
+drwxrwxr-x  3 vagrant vagrant    4096 Oct 22 13:15 .github/
+-rw-rw-r--  1 vagrant vagrant     330 Oct 22 13:15 .gitignore
+-rw-rw-r--  1 vagrant vagrant     197 Oct 22 13:22 Dockerfile
+-rw-rw-r--  1 vagrant vagrant     826 Oct 22 13:15 Jenkinsfile
+-rw-rw-r--  1 vagrant vagrant    1050 Oct 22 13:15 README.md
+-rw-rw-r--  1 vagrant vagrant     194 Oct 22 13:15 autopush.sh
+-rw-rw-r--  1 vagrant vagrant     555 Oct 22 13:15 docker-compose.yaml
+-rw-rw-r--  1 vagrant vagrant   10272 Oct 22 13:44 history.log
+-rw-rw-r--  1 vagrant vagrant     356 Oct 22 13:15 nginx.conf
+-rw-rw-r--  1 vagrant vagrant     762 Oct 22 13:15 openshift.Dockerfile
+-rw-rw-r--  1 vagrant vagrant 1344782 Oct 22 13:15 package-lock.json
+-rw-rw-r--  1 vagrant vagrant    1396 Oct 22 13:15 package.json
+-rw-rw-r--  1 vagrant vagrant     405 Oct 22 13:15 prod.Dockerfile
+drwxrwxr-x  2 vagrant vagrant    4096 Oct 22 13:15 public/
+drwxrwxr-x  7 vagrant vagrant    4096 Oct 22 13:15 src/
+-rw-rw-r--  1 vagrant vagrant     297 Oct 22 13:15 tempCodeRunnerFile.js
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+
+
+vagrant@ubuntu-jammy:~$ curl ifconfig.me
+117.20.115.216vagrant@ubuntu-jammy:~$ 
+vagrant@ubuntu-jammy:~$ fish
+Welcome to fish, the friendly interactive shell
+Type help for instructions on how to use fish
+vagrant@ubuntu-jammy ~> cd /etc/nginx/
+vagrant@ubuntu-jammy /e/nginx> cd conf.d/
+vagrant@ubuntu-jammy /e/n/conf.d> ll
+total 0
+vagrant@ubuntu-jammy /e/n/conf.d> sudo vim reactjs.conf
+fish: Job 1, 'sudo vim reactjs.conf' has stopped
+vagrant@ubuntu-jammy /e/n/conf.d> sudo vim reactjs.conf
+vagrant@ubuntu-jammy /e/n/conf.d> sudo vim reactjs.conf
+vagrant@ubuntu-jammy /e/n/conf.d> sudo rm reactjs.conf
+rm: cannot remove 'reactjs.conf': No such file or directory
+vagrant@ubuntu-jammy /e/n/conf.d [1]> sudo rm reactjs.conf
+rm: cannot remove 'reactjs.conf': No such file or directory
+vagrant@ubuntu-jammy /e/n/conf.d [1]> sudo vim reactjs.conf
+vagrant@ubuntu-jammy /e/n/conf.d [1]> sudo rm /etc/nginx/conf.d/.reactjs.conf.swp
+vagrant@ubuntu-jammy /e/n/conf.d> sudo vim reactjs.conf
+server {
+    listen 80;
+    server_name reactjs.devfou.site;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        
+        # Essential headers for client identification
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+} 
+vagrant@ubuntu-jammy /e/n/conf.d> sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+vagrant@ubuntu-jammy /e/n/conf.d> sudo systemctl restart nginx
+vagrant@ubuntu-jammy /e/n/conf.d> curl reactjs.devfou.site
+curl: (6) Could not resolve host: reactjs.devfou.site
+vagrant@ubuntu-jammy /e/n/conf.d [6]> curl -H "Host: reactjs.devfou.site" http://localhost
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>EarthDx Website</title><script defer="defer" src="/static/js/main.e05ea917.js"></script><link href="/static/css/main.a201afda.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>⏎                                             
+vagrant@ubuntu-jammy /e/n/conf.d> sudo vim /etc/hosts
+vagrant@ubuntu-jammy /e/n/conf.d> curl reactjs.devfou.site
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>EarthDx Website</title><script defer="defer" src="/static/js/main.e05ea917.js"></script><link href="/static/css/main.a201afda.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>⏎                                             
+vagrant@ubuntu-jammy /e/n/conf.d> curl reactjs.devfou.site
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>EarthDx Website</title><script defer="defer" src="/static/js/main.e05ea917.js"></script><link href="/static/css/main.a201afda.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>⏎                                             
+vagrant@ubuntu-jammy /e/n/conf.d> 127.0.0.1 reactjs.devfou.site
+127.0.0.1: command not found
+vagrant@ubuntu-jammy /e/n/conf.d [127]> 
+vagrant@ubuntu-jammy /e/n/conf.d [127]> curl reactjs.devfou.site
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>EarthDx Website</title><script defer="defer" src="/static/js/main.e05ea917.js"></script><link href="/static/css/main.a201afda.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>⏎                                             
+vagrant@ubuntu-jammy /e/n/conf.d>
+
+vagrant@ubuntu-jammy /e/n/conf.d> cat reactjs.conf 
+server {
+    listen 80;
+    server_name reactjs.devfou.site;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        
+        # Essential headers for client identification
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}  
+
+
+
+vagrant@ubuntu-jammy /e/n/conf.d> sudo apt update
+                                  sudo apt install certbot
+Hit:1 https://cli.github.com/packages stable InRelease                                                             
+Hit:2 https://download.docker.com/linux/ubuntu jammy InRelease                                                     
+Hit:3 http://archive.ubuntu.com/ubuntu jammy InRelease              
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+16 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  python3-acme python3-certbot python3-configargparse python3-icu python3-josepy python3-parsedatetime
+  python3-requests-toolbelt python3-rfc3339 python3-zope.component python3-zope.event python3-zope.hookable
+Suggested packages:
+  python-certbot-doc python3-certbot-apache python3-certbot-nginx python-acme-doc
+The following NEW packages will be installed:
+  certbot python3-acme python3-certbot python3-configargparse python3-icu python3-josepy python3-parsedatetime
+  python3-requests-toolbelt python3-rfc3339 python3-zope.component python3-zope.event python3-zope.hookable
+0 upgraded, 12 newly installed, 0 to remove and 16 not upgraded.
+Need to get 958 kB of archives.
+After this operation, 4915 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-josepy all 1.10.0-1 [22.0 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-requests-toolbelt all 0.9.1-1 [38.0 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-rfc3339 all 1.1-3 [7110 B]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 python3-acme all 1.21.0-1ubuntu0.1 [36.4 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-configargparse all 1.5.3-1 [26.9 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-parsedatetime all 2.6-2 [32.9 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-zope.hookable amd64 5.1.0-1build1 [11.6 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-zope.event all 4.4-3 [8180 B]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-zope.component all 4.3.0-3 [38.3 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-certbot all 1.21.0-1build1 [175 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-icu amd64 2.8.1-0ubuntu2 [540 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/universe amd64 certbot all 1.21.0-1build1 [21.3 kB]
+Fetched 958 kB in 6s (174 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package python3-josepy.
+(Reading database ... 100488 files and directories currently installed.)
+Preparing to unpack .../00-python3-josepy_1.10.0-1_all.deb ...
+Unpacking python3-josepy (1.10.0-1) ...
+Selecting previously unselected package python3-requests-toolbelt.
+Preparing to unpack .../01-python3-requests-toolbelt_0.9.1-1_all.deb ...
+Unpacking python3-requests-toolbelt (0.9.1-1) ...
+Selecting previously unselected package python3-rfc3339.
+Preparing to unpack .../02-python3-rfc3339_1.1-3_all.deb ...
+Unpacking python3-rfc3339 (1.1-3) ...
+Selecting previously unselected package python3-acme.
+Preparing to unpack .../03-python3-acme_1.21.0-1ubuntu0.1_all.deb ...
+Unpacking python3-acme (1.21.0-1ubuntu0.1) ...
+Selecting previously unselected package python3-configargparse.
+Preparing to unpack .../04-python3-configargparse_1.5.3-1_all.deb ...
+Unpacking python3-configargparse (1.5.3-1) ...
+Selecting previously unselected package python3-parsedatetime.
+Preparing to unpack .../05-python3-parsedatetime_2.6-2_all.deb ...
+Unpacking python3-parsedatetime (2.6-2) ...
+Selecting previously unselected package python3-zope.hookable.
+Preparing to unpack .../06-python3-zope.hookable_5.1.0-1build1_amd64.deb ...
+Unpacking python3-zope.hookable (5.1.0-1build1) ...
+Selecting previously unselected package python3-zope.event.
+Preparing to unpack .../07-python3-zope.event_4.4-3_all.deb ...
+Unpacking python3-zope.event (4.4-3) ...
+Selecting previously unselected package python3-zope.component.
+Preparing to unpack .../08-python3-zope.component_4.3.0-3_all.deb ...
+Unpacking python3-zope.component (4.3.0-3) ...
+Selecting previously unselected package python3-certbot.
+Preparing to unpack .../09-python3-certbot_1.21.0-1build1_all.deb ...
+Unpacking python3-certbot (1.21.0-1build1) ...
+Selecting previously unselected package python3-icu.
+Preparing to unpack .../10-python3-icu_2.8.1-0ubuntu2_amd64.deb ...
+Unpacking python3-icu (2.8.1-0ubuntu2) ...
+Selecting previously unselected package certbot.
+Preparing to unpack .../11-certbot_1.21.0-1build1_all.deb ...
+Unpacking certbot (1.21.0-1build1) ...
+Setting up python3-configargparse (1.5.3-1) ...
+Setting up python3-requests-toolbelt (0.9.1-1) ...
+Setting up python3-parsedatetime (2.6-2) ...
+Setting up python3-icu (2.8.1-0ubuntu2) ...
+Setting up python3-zope.event (4.4-3) ...
+Setting up python3-zope.hookable (5.1.0-1build1) ...
+Setting up python3-josepy (1.10.0-1) ...
+Setting up python3-rfc3339 (1.1-3) ...
+Setting up python3-zope.component (4.3.0-3) ...
+Setting up python3-acme (1.21.0-1ubuntu0.1) ...
+Setting up python3-certbot (1.21.0-1build1) ...
+Setting up certbot (1.21.0-1build1) ...
+Created symlink /etc/systemd/system/timers.target.wants/certbot.timer → /lib/systemd/system/certbot.timer.
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                               
+Scanning linux images...                                                                                            
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+vagrant@ubuntu-jammy /e/n/conf.d> 
+vagrant@ubuntu-jammy /e/n/conf.d> sudo apt install python3-certbot-nginx
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  python-certbot-nginx-doc
+The following NEW packages will be installed:
+  python3-certbot-nginx
+0 upgraded, 1 newly installed, 0 to remove and 16 not upgraded.
+Need to get 35.4 kB of archives.
+After this operation, 162 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 python3-certbot-nginx all 1.21.0-1 [35.4 kB]
+Fetched 35.4 kB in 2s (23.6 kB/s)                   
+Selecting previously unselected package python3-certbot-nginx.
+(Reading database ... 100881 files and directories currently installed.)
+Preparing to unpack .../python3-certbot-nginx_1.21.0-1_all.deb ...
+Unpacking python3-certbot-nginx (1.21.0-1) ...
+Setting up python3-certbot-nginx (1.21.0-1) ...
+Scanning processes...                                                                                               
+Scanning linux images...                                                                                            
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+vagrant@ubuntu-jammy /e/n/conf.d> sudo certbot --nginx \
+                                              --agree-tos --non-interactive \ 
+                                          --email foufou9172@gmail.com -d reactjs.devfou.site
+usage: 
+  certbot [SUBCOMMAND] [options] [-d DOMAIN] [-d DOMAIN] ...
+
+Certbot can obtain and install HTTPS/TLS/SSL certificates.  By default,
+it will attempt to use a webserver both for obtaining and installing the
+certificate. 
+certbot: error: unrecognized arguments:  
+--email: command not found
+fish: 
+        --email foufou9172@gmail.com -d reactjs.devfou.site
+        ^
+vagrant@ubuntu-jammy /e/n/conf.d [127]> sudo certbot --nginx --agree-tos --non-interactive --email foufou9172@gmail.
+com -d reactjs.devfou.site
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Account registered.
+Requesting a certificate for reactjs.devfou.site
+
+Certbot failed to authenticate some domains (authenticator: nginx). The Certificate Authority reported these problems:
+  Domain: reactjs.devfou.site
+  Type:   dns
+  Detail: DNS problem: NXDOMAIN looking up A for reactjs.devfou.site - check that a DNS record exists for this domain; DNS problem: NXDOMAIN looking up AAAA for reactjs.devfou.site - check that a DNS record exists for this domain
+
+Hint: The Certificate Authority failed to verify the temporary nginx configuration changes made by Certbot. Ensure the listed domains point to this nginx server and that it is accessible from the internet.
+
+Some challenges have failed.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+vagrant@ubuntu-jammy /e/n/conf.d [1]> 
+
+
+
+
+sudo certbot --nginx --agree-tos --non-interactive --email foufou9172@gmail.com -d reactjs.devfou.site
+
+sudo certbot --nginx \
+        --agree-tos --non-interactive \ 
+        --email foufou9172@gmail.com -d reactjs.devfou.site

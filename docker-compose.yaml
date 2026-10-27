@@ -1,9 +1,11 @@
 services: 
   reactjs-srv: 
+    build: .
     image: imagename
     container_name: reactjs-container 
     ports: 
-      - "3000:80"
+      # - "3000:80"
+      - "3000:3000"
     labels: 
       - "traefik.enable=true"
       - "traefik.http.routers.reactjs.tls=true"

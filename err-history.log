@@ -1,0 +1,346 @@
+vagrant@ubuntu-jammy:~$ cd dockerfile-learning/
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl http://127.0.0.1:3000
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Connection refused
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl http://localhost:3000
+curl: (7) Failed to connect to localhost port 3000 after 0 ms: Connection refused
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo systemctl restart nginx
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl http://localhost:3000
+curl: (7) Failed to connect to localhost port 3000 after 0 ms: Connection refused
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl http://127.0.0.1:3000
+curl: (7) Failed to connect to 127.0.0.1 port 3000 after 0 ms: Connection refused
+vagrant@ubuntu-jammy:~/dockerfile-learning$ ls -la
+total 1436
+drwxrwxr-x  6 vagrant vagrant    4096 Oct 22 13:29 .
+drwxr-x--- 14 vagrant vagrant    4096 Oct 26 03:08 ..
+-rw-rw-r--  1 vagrant vagrant      15 Oct 22 13:15 .env
+drwxrwxr-x  8 vagrant vagrant    4096 Oct 23 13:14 .git
+drwxrwxr-x  3 vagrant vagrant    4096 Oct 22 13:15 .github
+-rw-rw-r--  1 vagrant vagrant     330 Oct 22 13:15 .gitignore
+-rw-rw-r--  1 vagrant vagrant     197 Oct 22 13:22 Dockerfile
+-rw-rw-r--  1 vagrant vagrant     826 Oct 22 13:15 Jenkinsfile
+-rw-rw-r--  1 vagrant vagrant    1050 Oct 22 13:15 README.md
+-rw-rw-r--  1 vagrant vagrant     194 Oct 22 13:15 autopush.sh
+-rw-rw-r--  1 vagrant vagrant     555 Oct 22 13:15 docker-compose.yaml
+-rw-rw-r--  1 vagrant vagrant   46819 Oct 26 02:22 history.log
+-rw-rw-r--  1 vagrant vagrant     356 Oct 22 13:15 nginx.conf
+-rw-rw-r--  1 vagrant vagrant     762 Oct 22 13:15 openshift.Dockerfile
+-rw-rw-r--  1 vagrant vagrant 1344782 Oct 22 13:15 package-lock.json
+-rw-rw-r--  1 vagrant vagrant    1396 Oct 22 13:15 package.json
+-rw-rw-r--  1 vagrant vagrant     405 Oct 22 13:15 prod.Dockerfile
+drwxrwxr-x  2 vagrant vagrant    4096 Oct 22 13:15 public
+drwxrwxr-x  7 vagrant vagrant    4096 Oct 22 13:15 src
+-rw-rw-r--  1 vagrant vagrant     297 Oct 22 13:15 tempCodeRunnerFile.js
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose up -d
+[+] up 1/1
+ ✘ Image imagename Error pull access denied for imagename, repository does not exist or may requi...  2.1s
+Error response from daemon: pull access denied for imagename, repository does not exist or may require 'docker login'
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@ubuntu-jammy:~/dockerfile-learning$ cat docker-compose.yaml
+services: 
+  reactjs-srv: 
+    image: imagename
+    container_name: reactjs-container 
+    ports: 
+      - "3000:80"
+    labels: 
+      - "traefik.enable=true"
+      - "traefik.http.routers.reactjs.tls=true"
+      - "traefik.http.routers.reactjs.rule=Host(`earthdx.devnerd.store`)"
+      - "traefik.http.routers.reactjs.entrypoints=web,websecure"
+      - "traefik.http.routers.reactjs.tls.certresolver=letsencrypt"
+      # - "traefik.http.services.reactjs.loadbalancer.server.port=3000"
+    networks: 
+      - proxy
+networks: 
+  proxy:
+    external: true vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose up -d --build
+[+] Building 41.5s (10/12)                                                                                
+[+] Building 146.5s (14/14) FINISHED                                                                      
+ => [internal] load local bake definitions                                                           0.0s
+ => => reading from stdin 540B                                                                       0.0s
+ => [internal] load build definition from Dockerfile                                                 0.1s
+ => => transferring dockerfile: 236B                                                                 0.0s
+ => [internal] load metadata for docker.io/library/node:22-alpine                                    3.1s
+ => [internal] load .dockerignore                                                                    0.0s
+ => => transferring context: 2B                                                                      0.0s
+ => [1/7] FROM docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => => resolve docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => [internal] load build context                                                                    0.1s
+ => => transferring context: 629.38kB                                                                0.1s
+ => CACHED [2/7] WORKDIR /app                                                                        0.0s
+ => CACHED [3/7] COPY package*.json ./                                                               0.0s
+ => CACHED [4/7] RUN npm install --force                                                             0.0s
+ => [5/7] COPY . .                                                                                   0.3s
+ => [6/7] RUN npm run build                                                                         99.4s
+ => [7/7] RUN npm install -g serve                                                                  33.6s 
+ => exporting to image                                                                               8.8s 
+ => => exporting layers                                                                              4.4s 
+ => => exporting manifest sha256:5ff1cd33106c2560dbaf27eb304c7f0dd896890fe461b1c4e4fc6f9a30b9d80b    0.0s
+ => => exporting config sha256:3cfea0952b3ef925c7d935bd5dc2d4d3de690dcba7e12d60a3699b6dc02dc17a      0.1s
+ => => exporting attestation manifest sha256:166a642867bc15e5ba68686a457b6bc92ecabf6639360f4a71cffd  0.0s
+ => => exporting manifest list sha256:6be5f41c8862e5c7d32cb388d8eeaecb1767ae10f17e60946f9140b673478  0.0s
+ => => naming to docker.io/library/imagename:latest                                                  0.0s
+ => => unpacking to docker.io/library/imagename:latest                                               4.0s
+ => resolving provenance for metadata file                                                           0.1s
+[+] up 1/1
+ ✔ Image imagename Built                                                                            146.8s
+network proxy declared as external, but could not be found
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose up -d
+network proxy declared as external, but could not be found
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker network create proxy
+684bb50ed2ab0dc06506de9185d2e09092d1d832eaeaf1ec8cab19c112686357
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose up -d
+[+] up 1/1
+ ✔ Container reactjs-container Started                                                                1.5s
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                                               NAMES
+8dcd1bc1164b   imagename   "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   3000/tcp, 0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   reactjs-container
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo systemctl restart nginx
+vagrant@ubuntu-jammy:~/dockerfile-learning$ cat nginx.conf
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost;
+    
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+        try_files $uri $uri/ /index.html;
+    }
+    
+    # Error pages
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo certbot --nginx --agree-tos --non-interactive --email foufou9172@gmail.com -d reactjs.devfou.sitee
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Requesting a certificate for reactjs.devfou.site
+
+Certbot failed to authenticate some domains (authenticator: nginx). The Certificate Authority reported these problems:
+  Domain: reactjs.devfou.site
+  Type:   dns
+  Detail: DNS problem: NXDOMAIN looking up A for reactjs.devfou.site - check that a DNS record exists for this domain; DNS problem: NXDOMAIN looking up AAAA for reactjs.devfou.site - check that a DNS record exists for this domain
+
+Hint: The Certificate Authority failed to verify the temporary nginx configuration changes made by Certbot. Ensure the listed domains point to this nginx server and that it is accessible from the internet.
+
+Some challenges have failed.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl http://127.0.0.1:3000
+curl: (56) Recv failure: Connection reset by peer
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker logs reactjs-container
+ INFO  Accepting connections at http://localhost:3000
+vagrant@ubuntu-jammy:~/dockerfile-learning$ cat Dockerfile
+# Layered 
+FROM node:22-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --force
+COPY . .
+RUN npm run build
+RUN npm install -g serve
+EXPOSE 3000
+CMD ["serve", "-s", "build", "-l", "3000"]
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose down
+docker compose up -d --build
+sudo systemctl restart nginx
+[+] down 1/1
+ ✔ Container reactjs-container Removed                                                                0.6s
+[+] Building 143.3s (14/14) FINISHED                                                                      
+ => [internal] load local bake definitions                                                           0.0s
+ => => reading from stdin 540B                                                                       0.0s
+ => [internal] load build definition from Dockerfile                                                 0.0s
+ => => transferring dockerfile: 289B                                                                 0.0s
+ => [internal] load metadata for docker.io/library/node:22-alpine                                    3.0s
+ => [internal] load .dockerignore                                                                    0.0s
+ => => transferring context: 2B                                                                      0.0s
+ => [1/7] FROM docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => => resolve docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => [internal] load build context                                                                    0.0s
+ => => transferring context: 6.62kB                                                                  0.0s
+ => CACHED [2/7] WORKDIR /app                                                                        0.0s
+ => CACHED [3/7] COPY package*.json ./                                                               0.0s
+ => CACHED [4/7] RUN npm install --force                                                             0.0s
+ => [5/7] COPY . .                                                                                   0.3s
+ => [6/7] RUN npm run build                                                                         96.7s
+ => [7/7] RUN npm install -g serve                                                                  36.0s 
+ => exporting to image                                                                               6.2s 
+ => => exporting layers                                                                              4.1s 
+ => => exporting manifest sha256:1ffcef863ef05d08658e3b84d2685c96f6c9ddac41a8d8105f0c7a51d821b6cf    0.0s
+ => => exporting config sha256:cabf746dff07aa2bcb68cb200abb2a01cbf298d14bb22c79f99f9ca13f2bdfa2      0.0s
+ => => exporting attestation manifest sha256:f34f462d1037c4061eb49a99e90b85fd8093bac59475d3f48c64eb  0.1s
+ => => exporting manifest list sha256:cdca499d51843486fdaf2cb3a180b7917cba4ceb91627a2138e179a27763a  0.0s
+ => => naming to docker.io/library/imagename:latest                                                  0.0s
+ => => unpacking to docker.io/library/imagename:latest                                               1.9s
+ => resolving provenance for metadata file                                                           0.1s
+[+] up 2/2
+ ✔ Image imagename             Built                                                                143.7s
+ ✔ Container reactjs-container Started                                                                1.7s
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl http://localhost:3000
+curl: (7) Failed to connect to localhost port 3000 after 0 ms: Connection refused
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo certbot --nginx --agree-tos --non-interactive --email foufou9172@gmail.com -d reactjs.devfou.site
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Requesting a certificate for reactjs.devfou.site
+
+Certbot failed to authenticate some domains (authenticator: nginx). The Certificate Authority reported these problems:
+  Domain: reactjs.devfou.site
+  Type:   dns
+  Detail: DNS problem: NXDOMAIN looking up A for reactjs.devfou.site - check that a DNS record exists for this domain; DNS problem: NXDOMAIN looking up AAAA for reactjs.devfou.site - check that a DNS record exists for this domain
+
+Hint: The Certificate Authority failed to verify the temporary nginx configuration changes made by Certbot. Ensure the listed domains point to this nginx server and that it is accessible from the internet.
+
+Some challenges have failed.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+docker logs reactjs-container
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+file:///usr/local/lib/node_modules/serve/build/main.js:377
+      throw new Error(
+            ^
+
+Error: Unknown --listen endpoint scheme (protocol): undefined
+    at parseEndpoint (file:///usr/local/lib/node_modules/serve/build/main.js:377:13)
+    at type (/usr/local/lib/node_modules/serve/node_modules/arg/index.js:70:15)
+    at arg (/usr/local/lib/node_modules/serve/node_modules/arg/index.js:170:24)
+    at parseArguments (file:///usr/local/lib/node_modules/serve/build/main.js:414:28)
+    at file:///usr/local/lib/node_modules/serve/build/main.js:503:40
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.23.4
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose down
+docker compose up -d --build
+sudo systemctl restart nginx
+[+] down 1/1
+ ✔ Container reactjs-container Removed                                                                0.1s
+[+] Building 9.7s (10/12)                                                                                 
+[+] Building 131.6s (14/14) FINISHED                                                                      
+ => [internal] load local bake definitions                                                           0.0s
+ => => reading from stdin 540B                                                                       0.0s
+ => [internal] load build definition from Dockerfile                                                 0.0s
+ => => transferring dockerfile: 296B                                                                 0.0s
+ => [internal] load metadata for docker.io/library/node:22-alpine                                    2.6s
+ => [internal] load .dockerignore                                                                    0.0s
+ => => transferring context: 2B                                                                      0.0s
+ => [1/7] FROM docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => => resolve docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => [internal] load build context                                                                    0.0s
+ => => transferring context: 52.98kB                                                                 0.0s
+ => CACHED [2/7] WORKDIR /app                                                                        0.0s
+ => CACHED [3/7] COPY package*.json ./                                                               0.0s
+ => CACHED [4/7] RUN npm install --force                                                             0.0s
+ => [5/7] COPY . .                                                                                   0.2s
+ => [6/7] RUN npm run build                                                                         88.3s
+ => [7/7] RUN npm install -g serve                                                                  33.1s 
+ => exporting to image                                                                               6.1s 
+ => => exporting layers                                                                              3.8s 
+ => => exporting manifest sha256:5c484fc1fbba59b27f5a857103c33df126afe7961d0a889dcf226c9037ea1b81    0.0s
+ => => exporting config sha256:7d96ba08fa641050a934539b40396c43de74e30ecc2f2bc0b61b4856548d448d      0.0s
+ => => exporting attestation manifest sha256:bbc67b7997ca8e4def0a5c3402d3816aa5b31abfa24651e294c327  0.0s
+ => => exporting manifest list sha256:75f8fbfc6d0fa0907f097355cbd8e0e4d545d8e0a1768430b44f96f33214f  0.0s
+ => => naming to docker.io/library/imagename:latest                                                  0.0s
+ => => unpacking to docker.io/library/imagename:latest                                               2.0s
+ => resolving provenance for metadata file                                                           0.1s
+[+] up 2/2
+ ✔ Image imagename             Built                                                                132.0s
+ ✔ Container reactjs-container Started                                                                1.6s
+
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo systemctl restart nginx
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker logs reactjs-container
+file:///usr/local/lib/node_modules/serve/build/main.js:377
+      throw new Error(
+            ^
+
+Error: Unknown --listen endpoint scheme (protocol): http:
+    at parseEndpoint (file:///usr/local/lib/node_modules/serve/build/main.js:377:13)
+    at type (/usr/local/lib/node_modules/serve/node_modules/arg/index.js:70:15)
+    at arg (/usr/local/lib/node_modules/serve/node_modules/arg/index.js:170:24)
+    at parseArguments (file:///usr/local/lib/node_modules/serve/build/main.js:414:28)
+    at file:///usr/local/lib/node_modules/serve/build/main.js:503:40
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.23.4
+vagrant@ubuntu-jammy:~/dockerfile-learning$ sudo certbot --nginx --agree-tos --non-interactive --email foufou9172@gmail.com -d reactjs.devfou.site
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Requesting a certificate for reactjs.devfou.site
+
+Certbot failed to authenticate some domains (authenticator: nginx). The Certificate Authority reported these problems:
+  Domain: reactjs.devfou.site
+  Type:   dns
+  Detail: DNS problem: NXDOMAIN looking up A for reactjs.devfou.site - check that a DNS record exists for this domain; DNS problem: NXDOMAIN looking up AAAA for reactjs.devfou.site - check that a DNS record exists for this domain
+
+Hint: The Certificate Authority failed to verify the temporary nginx configuration changes made by Certbot. Ensure the listed domains point to this nginx server and that it is accessible from the internet.
+
+Some challenges have failed.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+
+
+
+
+fix now 
+=================
+
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker compose down
+docker compose up -d --build
+[+] down 1/1
+ ✔ Container reactjs-container Removed                                                                0.1s
+[+] Building 151.1s (14/14) FINISHED                                                                      
+ => [internal] load local bake definitions                                                           0.0s
+ => => reading from stdin 540B                                                                       0.0s
+ => [internal] load build definition from Dockerfile                                                 0.0s
+ => => transferring dockerfile: 295B                                                                 0.0s
+ => [internal] load metadata for docker.io/library/node:22-alpine                                    2.8s
+ => [internal] load .dockerignore                                                                    0.0s
+ => => transferring context: 2B                                                                      0.0s
+ => [1/7] FROM docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => => resolve docker.io/library/node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a4  0.1s
+ => [internal] load build context                                                                    0.1s
+ => => transferring context: 6.07kB                                                                  0.0s
+ => CACHED [2/7] WORKDIR /app                                                                        0.0s
+ => CACHED [3/7] COPY package*.json ./                                                               0.0s
+ => CACHED [4/7] RUN npm install --force                                                             0.0s
+ => [5/7] COPY . .                                                                                   0.3s
+ => [6/7] RUN npm run build                                                                         95.9s
+ => [7/7] RUN npm install -g serve                                                                  43.3s 
+ => exporting to image                                                                               7.4s 
+ => => exporting layers                                                                              4.8s 
+ => => exporting manifest sha256:548f637476559aeaa261cf820d9016fd67020f48b39e1ef1f87d1e58bb5d2b77    0.1s
+ => => exporting config sha256:73601f47fb5c54deb040ba17c2e24dd7de9d123e85dab3fb05a019f1f8ee4197      0.1s
+ => => exporting attestation manifest sha256:e6131287e5b4aaec191e271d863711b7006a6598b6569ff1aa8971  0.1s
+ => => exporting manifest list sha256:36b695d7859b4c50681a0685e9702c225aa05a218478228ae10665df40b4d  0.1s
+ => => naming to docker.io/library/imagename:latest                                                  0.0s
+ => => unpacking to docker.io/library/imagename:latest                                               2.1s
+ => resolving provenance for metadata file                                                           0.1s
+[+] up 2/2
+ ✔ Image imagename             Built                                                                151.5s
+ ✔ Container reactjs-container Started                                                                2.8s
+vagrant@ubuntu-jammy:~/dockerfile-learning$  docker ps
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+2b8defc4e63a   imagename   "docker-entrypoint.s…"   7 minutes ago   Up 7 minutes   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp   reactjs-container
+vagrant@ubuntu-jammy:~/dockerfile-learning$ curl -I http://localhost:3000
+HTTP/1.1 200 OK
+Content-Length: 650
+Content-Disposition: inline; filename="index.html"
+Accept-Ranges: bytes
+ETag: "ad676f4b2b0435b7303994f673e3f4e90e8c3038"
+Content-Type: text/html; charset=utf-8
+Vary: Accept-Encoding
+Date: Mon, 26 Oct 2026 04:07:08 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+vagrant@ubuntu-jammy:~/dockerfile-learning$ docker logs reactjs-container
+ INFO  Accepting connections at http://localhost:3000
+ HTTP  10/26/2026 4:07:08 AM 172.19.0.1 HEAD /
+ HTTP  10/26/2026 4:07:08 AM 172.19.0.1 Returned 200 in 94 ms
+vagrant@ubuntu-jammy:~/dockerfile-learning$ 
