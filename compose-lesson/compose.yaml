@@ -1,0 +1,9 @@
+services:
+  postgres:
+    images: postgres
+    port:
+      - "5432:5432"
+    environment:
+      -POSTGRES_USER=${DB_USER:-postgres}
+      -POSTGRES_DB=${DB_NAME}
+      -POSTGRES_PASSWORD=${DB_PASS:? DB password is required!}

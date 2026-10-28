@@ -613,3 +613,186 @@ sudo certbot --nginx --agree-tos --non-interactive --email foufou9172@gmail.com 
 sudo certbot --nginx \
         --agree-tos --non-interactive \ 
         --email foufou9172@gmail.com -d reactjs.devfou.site
+
+27-10-2026
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$
+
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ docker volume create nexus-data
+nexus-data
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ docker run -d \
+  --name nexus \
+  --restart unless-stopped \
+  -p 8081:8081 \
+  -v nexus-data:/nexus-data \
+  sonatype/nexus3
+e48d870e313a1cc48869c5c207af55b32558b7fdea83013db901a57323b3f375
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS                                  PORTS     NAMES
+e48d870e313a   sonatype/nexus3   "/opt/sonatype/nexus…"   6 seconds ago   Restarting (1) Less than a second ago             nexus
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ docker logs -f nexus
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+#
+OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x0000000757000000, 2835349504, 0) failed; error='Not enough space' (errno=12)
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 2835349504 bytes. Error detail: committing reserved memory.
+# An error report file with more information is saved as:
+# /tmp/hs_err_pid1.log
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ docker rm -f nexus
+nexus
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           1.9Gi       549Mi       699Mi       1.0Mi       714Mi       1.2Gi
+Swap:             0B          0B          0B
+
+vagrant@ubuntu-jammy:~$ docker run -d \
+  --name nexus \
+  --restart unless-stopped \
+  -p 8081:8081 \
+  -v nexus-data:/nexus-data \
+  sonatype/nexus3
+ff1e9ad6d450416638ae21df6fd96c4dd06814cf5092b3b36abf1ae594580d54
+vagrant@ubuntu-jammy:~$ docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                                         NAMES
+ff1e9ad6d450   sonatype/nexus3   "/opt/sonatype/nexus…"   11 seconds ago   Up 10 seconds   0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp   nexus
+vagrant@ubuntu-jammy:~$ docker images
+                                                                                                   i Info →   U  In Use
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+alpine:latest                 be2656061b53         13MB         3.94MB    U   
+hello-world:latest            5e2309035332       25.9kB         9.49kB        
+imagename:latest              36b695d7859b       1.23GB          255MB    U   
+longfou/ite3-reactjs:latest   7d17d69c4014        104MB         28.5MB    U   
+normal-reactjs:latest         9d9766b544b0       1.22GB          255MB        
+sonatype/nexus3:latest        5a90cc609f47       1.17GB          491MB    U   
+vagrant@ubuntu-jammy:~$ docker logs --tail 50 nexus
+06:58:13,559 |-WARN in ch.qos.logback.core.joran.action.ConversionRuleAction - [converterClass] attribute is deprecated and replaced by [class]. See element [conversionRule] near line 13
+06:58:13,795 |-WARN in ch.qos.logback.core.model.processor.ImplicitModelHandler - Ignoring unknown property [jmxConfigurator] in [ch.qos.logback.classic.LoggerContext]
+2026-10-27 06:58:14,826+0000 INFO  [main] *SYSTEM com.sonatype.nexus.bootstrap.entrypoint.pro.SonatypeNexusRepositoryApplication - Starting SonatypeNexusRepositoryApplication v3.97.2-02 using Java 21.0.12 with PID 1 (/opt/sonatype/nexus/bin/sonatype-nexus-repository-3.97.2-02.jar started by nexus in /opt/sonatype/nexus)
+2026-10-27 06:58:14,834+0000 INFO  [main] *SYSTEM com.sonatype.nexus.bootstrap.entrypoint.pro.SonatypeNexusRepositoryApplication - No active profile set, falling back to 1 default profile: "default"
+2026-10-27 06:58:21,577+0000 INFO  [main] *SYSTEM java.util.prefs - Created user preferences directory.
+2026-10-27 06:58:21,767+0000 INFO  [main] *SYSTEM org.sonatype.nexus.bootstrap.entrypoint.ApplicationLauncher - Starting nexus with edition COMMUNITY
+2026-10-27 06:58:22,148+0000 INFO  [main] *SYSTEM org.sonatype.nexus.bootstrap.entrypoint.SpringComponentScan - Scanning for components in packages: [org.sonatype.nexus, com.sonatype.nexus]
+vagrant@ubuntu-jammy:~$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       1.3Gi       1.8Gi       1.0Mi       788Mi       2.3Gi
+Swap:             0B          0B          0B
+vagrant@ubuntu-jammy:~$ docker start nexus
+nexus
+vagrant@ubuntu-jammy:~$ 
+
+Cvagrant@ubuntu-jammy:~curl -I http://localhost:808181
+HTTP/1.1 200 OK
+Server: Nexus/3.97.2-02 (COMMUNITY)
+X-Content-Type-Options: nosniff
+Content-Security-Policy: default-src http: data: blob: 'unsafe-inline'; script-src http: 'unsafe-inline' 'unsafe-eval'
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+Content-Type: text/html
+Last-Modified: Tue, 27 Oct 2026 07:00:39 GMT
+Pragma: no-cache
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate, post-check=0, pre-check=0
+Expires: 0
+Content-Length: 8384
+
+vagrant@ubuntu-jammy:~$ docker logs --tail 20 nexus
+2026-10-27 07:00:27,557+0000 INFO  [main] *SYSTEM com.sonatype.nexus.bootstrap.entrypoint.pro.SonatypeNexusRepositoryApplication - Started SonatypeNexusRepositoryApplication in 136.374 seconds (process running for 144.018)
+2026-10-27 07:00:34,303+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] state change WAITING -> RUNNING
+2026-10-27 07:00:34,330+0000 INFO  [quartz-15-thread-20] *TASK com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCTask - Starting malicious-risk-on-disk-auto-enable-rhc task
+2026-10-27 07:00:34,332+0000 INFO  [quartz-15-thread-20] *TASK com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCTask - Found 2 proxy repositories
+2026-10-27 07:00:35,564+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] : state=WAITING
+2026-10-27 07:00:35,587+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: maven-central' [healthcheck] scheduled: hourly
+2026-10-27 07:00:35,609+0000 INFO  [quartz-15-thread-20] *TASK com.sonatype.nexus.plugins.healthcheck.service.impl.HealthCheckTaskManagerImpl - Enabled health check for repository maven-central
+2026-10-27 07:00:35,664+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] : state=WAITING
+2026-10-27 07:00:35,671+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] scheduled: hourly
+2026-10-27 07:00:35,686+0000 INFO  [quartz-15-thread-20] *TASK com.sonatype.nexus.plugins.healthcheck.service.impl.HealthCheckTaskManagerImpl - Enabled health check for repository nuget.org-proxy
+2026-10-27 07:00:35,692+0000 INFO  [quartz-15-thread-20] *TASK com.sonatype.nexus.risk.riskondisk.MaliciousRiskOnDiskAutoEnableRHCTask - Completed malicious-risk-on-disk-auto-enable-rhc task
+2026-10-27 07:00:35,702+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'Malicious Risk On Disk - Auto enable Health Check for proxy repositories on startup' [malicious-risk-on-disk-auto-enable-rhc] state change RUNNING -> WAITING (OK)
+2026-10-27 07:00:39,002+0000 INFO  [qtp1499561930-37] *UNKNOWN org.apache.shiro.session.mgt.AbstractValidatingSessionManager - Enabling session validation scheduler...
+2026-10-27 07:00:39,024+0000 INFO  [qtp1499561930-37] *UNKNOWN org.sonatype.nexus.internal.security.anonymous.AnonymousManagerImpl - Using default configuration: AnonymousConfigurationData{enabled=false, userId='anonymous', realmName='NexusAuthorizingRealm'}
+2026-10-27 07:00:40,566+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] state change WAITING -> RUNNING
+2026-10-27 07:00:42,387+0000 INFO  [quartz-15-thread-19] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] state change WAITING -> RUNNING
+2026-10-27 07:00:45,193+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: maven-central' [healthcheck] scheduled: hourly
+2026-10-27 07:00:45,203+0000 INFO  [quartz-15-thread-20] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: maven-central' [healthcheck] state change RUNNING -> WAITING (OK)
+2026-10-27 07:00:45,919+0000 INFO  [quartz-15-thread-19] *TASK org.sonatype.nexus.scheduling.TaskSchedulerImpl - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] scheduled: hourly
+2026-10-27 07:00:45,928+0000 INFO  [quartz-15-thread-19] *TASK org.sonatype.nexus.quartz.internal.task.QuartzTaskInfo - Task 'System - Repository Health Check: nuget.org-proxy' [healthcheck] state change RUNNING -> WAITING (OK)
+vagrant@ubuntu-jammy:~$ docker exec nexus cat /nexus-data/admin.password
+vagrant@ubuntu-jammy:~$ cd ~/D:nexus-blob-test
+curl -v --user admin --upload-file website-v1.0.0.zip http://localhost:8081/repository/website-raw/website-v1.0.0.zip
+Enter host password for user 'admin':
+*   Trying 127.0.0.1:8081...
+* Connected to localhost (127.0.0.1) port 8081 (#0)
+* Server auth using Basic with user 'admin'
+> PUT /repository/website-raw/website-v1.0.0.zip HTTP/1.1
+> Host: localhost:8081
+> Authorization: Basic YWRtaW46MTIzNDU2Nzg=
+> User-Agent: curl/7.81.0
+> Accept: */*
+> Content-Length: 249
+> Expect: 100-continue
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 100 Continue
+* We are completely uploaded and fine
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 201 Created
+< Server: Nexus/3.97.2-02 (COMMUNITY)
+< Vary: Accept-Encoding
+< X-Content-Type-Options: nosniff
+< Content-Security-Policy: sandbox allow-forms allow-modals allow-popups allow-presentation allow-scripts allow-top-navigation
+< X-XSS-Protection: 0
+< Content-Length: 0
+< 
+* Connection #0 to host localhost left intact
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ sha256sum website-v1.0.0.zip downloaded-website-v1.0.0.zip
+b5d910916df20f42f65c6071b85bc5d41fec3fbd84ba91df075955827897348b  website-v1.0.0.zip
+sha256sum: downloaded-website-v1.0.0.zip: No such file or directory
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ curl -f --user admin \
+http://localhost:8081/repository/website-raw/website-v1.0.0.zip \
+-o downloaded-website-v1.0.0.zip
+Enter host password for user 'admin':
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   249  100   249    0     0   1419      0 --:--:-- --:--:-- --:--:--  1431
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ sha256sum website-v1.0.0.zip downloaded-website-v1.0.0.zip
+b5d910916df20f42f65c6071b85bc5d41fec3fbd84ba91df075955827897348b  website-v1.0.0.zip
+b5d910916df20f42f65c6071b85bc5d41fec3fbd84ba91df075955827897348b  downloaded-website-v1.0.0.zip
+vagrant@ubuntu-jammy:~/D:nexus-blob-test$ 
+
+docker run -dp 5432:5432 \
+  --name postgres-cont \
+  -e POSTGRES_PASSWORD=pass123 \
+  

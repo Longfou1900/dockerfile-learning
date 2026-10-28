@@ -1,0 +1,28 @@
+
+services: 
+  nginx1: 
+    container_name: cont1
+    image: nginx 
+    ports: 
+      - "3000:80"
+    networks:
+      - nginx-net 
+  nginx2:
+    container_name: cont2
+    image: nginx 
+    ports: 
+      - "3001:80" 
+    networks:
+      - nginx-net 
+  nginx3: 
+    container_name: cont3
+    image: nginx 
+    ports: 
+      - "3002:80"
+    networks:
+      - nginx-net 
+networks: 
+  nginx-net: 
+    name: nginx-net 
+    driver: bridge 
+# volumes:
