@@ -1,0 +1,44 @@
+# main docker compose 
+networks:
+  fullstack-net: 
+services: 
+  frontend: 
+    build: 
+      context: sample-product-reactapp 
+      dockerfile: Dockerfile 
+    image: product-frontend 
+    pull_policy: build 
+    networks:
+      - fullstack-net
+    ports:
+      - 3000:80 
+  backend:
+    image: product-api
+    build: 
+     context: product-api-jpa
+     dockerfile: dev.Dockerfile
+     args: 
+      - PORT=8080
+    # environment: 
+    pull_policy: build
+    networks:
+      - fullstack-net
+    volumes: 
+      - image-backup-vol:/app/filestorage/images
+    # ports: 
+    #   - 8080:8080
+  database:
+    image: postgres:latest
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: your-password
+      POSTGRES_DB: postgres
+    # ports:
+    #   - "5432:5432"
+    networks:
+      - fullstack-net
+    volumes: 
+      - postgres-data:/var/lib/postgresql
+volumes: 
+  image-backup-vol:
+  postgres-data:
