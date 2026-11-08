@@ -1,0 +1,4 @@
+sudo certbot --nginx \
+    --agree-tos --non-interactive \
+    --email foufou9173@gmail.com -d reactjs.devfou.site
+    

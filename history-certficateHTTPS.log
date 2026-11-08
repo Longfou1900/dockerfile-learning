@@ -1,0 +1,449 @@
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ docker images
+                                                                                                                                           i Info →   U  In Use
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+longfou/ite3-reactjs:latest   cdd6092115c6        104MB         28.5MB        
+node:22-alpine                0e1754758c2d        239MB         61.7MB        
+node:alpine                   8996bb5821d6        252MB         63.3MB        
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ docker run -dp 3000:80 --name reactjs-cont longfou/ite3-reactjs
+0ca6845f2b457c487942665a397db51a78323bdb94c3d43a944c8d11dcf5684b
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+0ca6845f2b45   longfou/ite3-reactjs   "nginx -g 'daemon of…"   17 seconds ago   Up 16 seconds   0.0.0.0:3000->80/tcp, [::]:3000->80/tcp   reactjs-cont
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ curl locahost:3000
+curl: (6) Could not resolve host: locahost
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ curl localhost:3000
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>EarthDx Website</title><script defer="defer" src="/static/js/main.e05ea917.js"></script><link href="/static/css/main.a201afda.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>ubuntu@ip-172-31-35-240:~/dockerfile-learning$ curl ifconfig.me
+13.237.190.2ubuntu@ip-172-31-35-240:~/dockerfile-learning$ 
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ cd /etc/nginx/
+ubuntu@ip-172-31-35-240:/etc/nginx$ cd conf.d/
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ ll
+total 8
+drwxr-xr-x 2 root root 4096 Oct 24 14:23 ./
+drwxr-xr-x 8 root root 4096 Oct 29 07:19 ../
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo vim reactjs.conf
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo systemctl restart nginx
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl reactjs.devfou.site
+curl: (28) Failed to connect to reactjs.devfou.site port 80 after 136431 ms: Could not connect to server
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo cat /etc/nginx/conf.d/reactjs.conf
+server {
+    listen 80;
+    server_name devfou.site;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}   
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -I http://127.0.0.1
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 10:12:17 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Thu, 29 Oct 2026 07:19:42 GMT
+Connection: keep-alive
+ETag: "6ae2f38e-267"
+Accept-Ranges: bytes
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -i http://127.0.0.1 -H "Host: reactjs.devfou.site"
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 10:12:30 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Thu, 29 Oct 2026 07:19:42 GMT
+Connection: keep-alive
+ETag: "6ae2f38e-267"
+Accept-Ranges: bytes
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo ss -ltnp | grep -E ':80|:3000'
+LISTEN 0      4096         0.0.0.0:3000       0.0.0.0:*    users:(("docker-proxy",pid=17918,fd=7))                                           
+LISTEN 0      511          0.0.0.0:80         0.0.0.0:*    users:(("nginx",pid=19556,fd=5),("nginx",pid=19555,fd=5),("nginx",pid=19554,fd=5))
+LISTEN 0      4096            [::]:3000          [::]:*    users:(("docker-proxy",pid=17927,fd=7))                                           
+LISTEN 0      511             [::]:80            [::]:*    users:(("nginx",pid=19556,fd=6),("nginx",pid=19555,fd=6),("nginx",pid=19554,fd=6))
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo systemctl status nginx --no-pager
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Sun 2026-11-08 10:06:14 UTC; 6min ago
+ Invocation: 041244625dcb4b7d9c2b17006807315e
+       Docs: man:nginx(8)
+    Process: 19550 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 19553 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+   Main PID: 19554 (nginx)
+      Tasks: 3 (limit: 627)
+     Memory: 3.5M (peak: 3.9M)
+        CPU: 33ms
+     CGroup: /system.slice/nginx.service
+             ├─19554 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             ├─19555 "nginx: worker process"
+             └─19556 "nginx: worker process"
+
+Nov 08 10:06:14 ip-172-31-35-240 systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Nov 08 10:06:14 ip-172-31-35-240 systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl ifconfig.me
+13.237.190.2ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig +short reactjs.devfou.site
+3.25.164.207
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -I http://127.0.0.1
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 10:18:54 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Thu, 29 Oct 2026 07:19:42 GMT
+Connection: keep-alive
+ETag: "6ae2f38e-267"
+Accept-Ranges: bytes
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -I -H "Host: reactjs.devfou.site" http://127.0.0.1
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 10:19:01 GMT
+Content-Type: text/html
+Content-Length: 615
+Last-Modified: Thu, 29 Oct 2026 07:19:42 GMT
+Connection: keep-alive
+ETag: "6ae2f38e-267"
+Accept-Ranges: bytes
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig +short reactjs.devfou.site @1.1.1.1
+3.25.164.207
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo ss -ltnp | grep ':80'
+LISTEN 0      511          0.0.0.0:80         0.0.0.0:*    users:(("nginx",pid=19556,fd=5),("nginx",pid=19555,fd=5),("nginx",pid=19554,fd=5))
+LISTEN 0      511             [::]:80            [::]:*    users:(("nginx",pid=19556,fd=6),("nginx",pid=19555,fd=6),("nginx",pid=19554,fd=6))
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig NS devfou.site +short
+thomas.ns.cloudflare.com.
+tani.ns.cloudflare.com.
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig +trace reactjs.devfou.site
+
+; <<>> DiG 9.20.24-1ubuntu0.5-Ubuntu <<>> +trace reactjs.devfou.site
+;; global options: +cmd
+.                       86299   IN      NS      h.root-servers.net.
+.                       86299   IN      NS      j.root-servers.net.
+.                       86299   IN      NS      k.root-servers.net.
+.                       86299   IN      NS      d.root-servers.net.
+.                       86299   IN      NS      i.root-servers.net.
+.                       86299   IN      NS      l.root-servers.net.
+.                       86299   IN      NS      g.root-servers.net.
+.                       86299   IN      NS      f.root-servers.net.
+.                       86299   IN      NS      b.root-servers.net.
+.                       86299   IN      NS      m.root-servers.net.
+.                       86299   IN      NS      e.root-servers.net.
+.                       86299   IN      NS      c.root-servers.net.
+.                       86299   IN      NS      a.root-servers.net.
+;; Received 239 bytes from 127.0.0.53#53(127.0.0.53) in 1 ms
+
+site.                   172800  IN      NS      ns01.trs-dns.com.
+site.                   172800  IN      NS      ns01.trs-dns.net.
+site.                   172800  IN      NS      ns10.trs-dns.org.
+site.                   172800  IN      NS      ns10.trs-dns.info.
+site.                   86400   IN      DS      31826 13 2 E054E10B0036A0F449CC3A7D539A919EF9F18C9F256B2BB51526CF6F D7D33B6B
+site.                   86400   IN      RRSIG   DS 8 1 86400 20261121050000 20261108040000 8763 . QQYxsCjkGRkogzqyqkd5YATp8KEvCP7pQ9mMs9om7HrzpYJ3YhOxkUvS gYYk2iEAZ/Qmm/1pM87XpcayAsX7coW1PEWbx4jz+oE5p7yEG4OCDJL6 4HWFbiDsJemj8ZokLYQ3lEB4EgFdIRUewRgsRm4SjY+2RhCxYfIb2BhR HMoyjIZZY9WXKR2rAEMK7ZP2200AkRBm6MSEFBVw+bicD57kXCA6mk0M 9yE2ux3RkztFys8omudb+ELU2pk090lr11ltgsaau7TtXR74s9YpIE8V 44a2q+NajByVWRLm5pcCYadcRVJtoqVr5UeMc8FSOZdGtY4fcoQNwuWN QAscUw==
+;; Received 680 bytes from 198.97.190.53#53(h.root-servers.net) in 0 ms
+
+;; UDP setup with 2620:171:812:1534:8::1#53(2620:171:812:1534:8::1) for reactjs.devfou.site failed: network unreachable.
+;; no servers could be reached
+;; UDP setup with 2620:171:812:1534:8::1#53(2620:171:812:1534:8::1) for reactjs.devfou.site failed: network unreachable.
+;; no servers could be reached
+;; UDP setup with 2620:171:812:1534:8::1#53(2620:171:812:1534:8::1) for reactjs.devfou.site failed: network unreachable.
+devfou.site.            900     IN      NS      thomas.ns.cloudflare.com.
+devfou.site.            900     IN      NS      tani.ns.cloudflare.com.
+KKKLDPNN5K2662EI72HM1TVTEE3UAKEA.site. 300 IN NSEC3 1 1 0 - KKKNHB2F66RI3J98KO8FC72T7MFCPNV1 NS SOA RRSIG DNSKEY NSEC3PARAM
+KKKLDPNN5K2662EI72HM1TVTEE3UAKEA.site. 300 IN RRSIG NSEC3 13 2 300 20261130084733 20261031160912 40708 site. sEXMd+kbC9JLj4LbV4qXJNfqqpE9i3QZp0aTu2DKtSFyVlx3jH19dm91 O50c6BSz002NIm6HxJgRStabbtCTnw==
+5OVANUV149PG174U896EC9E3NSCF2A1Q.site. 300 IN NSEC3 1 1 0 - 5OVPU43APPDTFG2ORRNPKAQ5QB4U5VOA NS DS RRSIG
+5OVANUV149PG174U896EC9E3NSCF2A1Q.site. 300 IN RRSIG NSEC3 13 2 300 20261123232034 20261025183913 40708 site. BGiNFIVEewvjDOrPuyNFFM/LnGYITf8E6k5lBoouRMlsfvL8x2aBueyf mIL78Pn/TC39dEO9bEN1Q8gjgEt1qg==
+;; Received 492 bytes from 64.96.1.1#53(ns01.trs-dns.com) in 1 ms
+
+;; UDP setup with 2606:4700:50::adf5:3ae0#53(2606:4700:50::adf5:3ae0) for reactjs.devfou.site failed: network unreachable.
+reactjs.devfou.site.    300     IN      A       3.25.164.207
+;; Received 64 bytes from 173.245.58.224#53(tani.ns.cloudflare.com) in 3 ms
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo cat /etc/nginx/conf.d/reactjs.conf
+server {
+    listen 80;
+    server_name devfou.site;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}   
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo vim reactjs.conf
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo cat /etc/nginx/conf.d/reactjs.conf
+server {
+    listen 80;
+    server_name reactjs.devfou.site;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}   
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl reactjs.devfou.site
+
+^C
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo sysytemctl reload nginx
+sudo: 'sysytemctl': command not found
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo systemctl reload nginx
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl --max-time 5 -I http://127.0.0.1:3000
+HTTP/1.1 200 OK
+Server: nginx/1.31.8
+Date: Sun, 08 Nov 2026 10:57:21 GMT
+Content-Type: text/html
+Content-Length: 650
+Last-Modified: Sun, 08 Nov 2026 09:21:02 GMT
+Connection: keep-alive
+ETag: "6af03efe-28a"
+Accept-Ranges: bytes
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl --max-time 5 -I -H "Host: reactjs.devfou.site" http://127.0.0.1
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 10:57:25 GMT
+Content-Type: text/html
+Content-Length: 650
+Connection: keep-alive
+Last-Modified: Sun, 08 Nov 2026 09:21:02 GMT
+ETag: "6af03efe-28a"
+Accept-Ranges: bytes
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig +short reactjs.devfou.site
+3.25.164.207
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -v --connect-timeout 5 --max-time 10 http://reactjs.devfou.site
+* Host reactjs.devfou.site:80 was resolved.
+* IPv6: (none)
+* IPv4: 3.25.164.207
+*   Trying 3.25.164.207:80...
+* Connection timed out after 5002 milliseconds
+* closing connection #0
+curl: (28) Connection timed out after 5002 milliseconds
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig +short reactjs.devfou.site @tani.ns.cloudflare.com
+dig +short reactjs.devfou.site @thomas.ns.cloudflare.com
+3.25.164.207
+3.25.164.207
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig NS devfou.site +short
+thomas.ns.cloudflare.com.
+tani.ns.cloudflare.com.
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig +short reactjs.devfou.site
+3.25.164.207
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig NS devfou.site @1.1.1.11
+;; communications error to 1.1.1.11#53: timed out
+;; communications error to 1.1.1.11#53: timed out
+;; communications error to 1.1.1.11#53: timed out
+
+; <<>> DiG 9.20.24-1ubuntu0.5-Ubuntu <<>> NS devfou.site @1.1.1.11
+;; global options: +cmd
+;; no servers could be reached
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig NS devfou.site @1.1.1.1
+
+; <<>> DiG 9.20.24-1ubuntu0.5-Ubuntu <<>> NS devfou.site @1.1.1.1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 47392
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+;; QUESTION SECTION:
+;devfou.site.                   IN      NS
+
+;; ANSWER SECTION:
+devfou.site.            86400   IN      NS      junade.ns.cloudflare.com.
+devfou.site.            86400   IN      NS      kayleigh.ns.cloudflare.com.
+
+;; Query time: 10 msec
+;; SERVER: 1.1.1.1#53(1.1.1.1) (UDP)
+;; WHEN: Sun Nov 08 11:15:41 UTC 2026
+;; MSG SIZE  rcvd: 101
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ dig NS devfou.site +short
+thomas.ns.cloudflare.com.
+tani.ns.cloudflare.com.
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl --max-time 5 -I -H "Host: reactjs.devfou.site" http://127.0.0.1
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 11:18:12 GMT
+Content-Type: text/html
+Content-Length: 650
+Connection: keep-alive
+Last-Modified: Sun, 08 Nov 2026 09:21:02 GMT
+ETag: "6af03efe-28a"
+Accept-Ranges: bytes
+
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl reactjs.defvou.site
+curl: (6) Could not resolve host: reactjs.defvou.site
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl reactjs.dvefou.site
+curl: (6) Could not resolve host: reactjs.dvefou.site
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl reactjs.decvfou.site
+curl: (6) Could not resolve host: reactjs.decvfou.site
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl reactjs.devfou.site
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body>
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center>nginx/1.28.3 (Ubuntu)</center>
+</body>
+</html>
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -I https://reactjs.devfou.site
+sudo certbot certificates
+^C
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo certbot certificates
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Found the following certs:
+  Certificate Name: reactjs.devfou.site
+    Serial Number: 66534261704dca08edfdd9d32e8622896f9
+    Key Type: ECDSA
+    Domains: reactjs.devfou.site
+    Expiry Date: 2027-02-06 10:35:47+00:00 (VALID: 89 days)
+    Certificate Path: /etc/letsencrypt/live/reactjs.devfou.site/fullchain.pem
+    Private Key Path: /etc/letsencrypt/live/reactjs.devfou.site/privkey.pem
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -IL http://reactjs.devfou.site
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 11:46:02 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Location: https://reactjs.devfou.site/
+
+^C
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -IL http://reactjs.devfou.site
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 11:49:20 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Location: https://reactjs.devfou.site/
+
+curl: (28) Failed to connect to reactjs.devfou.site port 443 after 135998 ms: Could not connect to server
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ sudo ss -tlnp | grep ':443'
+LISTEN 0      511          0.0.0.0:443        0.0.0.0:*    users:(("nginx",pid=24218,fd=11),("nginx",pid=24217,fd=11),("nginx",pid=19554,fd=11))
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -Iv --connect-timeout 10 https://reactjs.devfou.site
+* Host reactjs.devfou.site:443 was resolved.
+* IPv6: (none)
+* IPv4: 13.237.190.2
+*   Trying 13.237.190.2:443...
+* Connection timed out after 10002 milliseconds
+* closing connection #0
+curl: (28) Connection timed out after 10002 milliseconds
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -Iv --connect-timeout 10 https://reactjs.devfou.site
+* Host reactjs.devfou.site:443 was resolved.
+* IPv6: (none)
+* IPv4: 13.237.190.2
+*   Trying 13.237.190.2:443...
+* ALPN: curl offers h2,http/1.1
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* SSL Trust Anchors:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+*   CApath: /etc/ssl/certs
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519MLKEM768 / id-ecPublicKey
+* ALPN: server accepted http/1.1
+* Server certificate:
+*   subject: CN=reactjs.devfou.site
+*   start date: Nov  8 10:35:48 2026 GMT
+*   expire date: Feb  6 10:35:47 2027 GMT
+*   issuer: C=US; O=Let's Encrypt; CN=YE2
+*   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 1: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 3: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using ecdsa-with-SHA384
+*   subjectAltName: "reactjs.devfou.site" matches cert's "reactjs.devfou.site"
+* SSL certificate verified via OpenSSL.
+* Established connection to reactjs.devfou.site (13.237.190.2 port 443) from 172.31.35.240 port 43512 
+* using HTTP/1.x
+> HEAD / HTTP/1.1
+> Host: reactjs.devfou.site
+> User-Agent: curl/8.18.0
+> Accept: */*
+> 
+* Request completely sent off
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+< HTTP/1.1 200 OK
+HTTP/1.1 200 OK
+< Server: nginx/1.28.3 (Ubuntu)
+Server: nginx/1.28.3 (Ubuntu)
+< Date: Sun, 08 Nov 2026 12:04:03 GMT
+Date: Sun, 08 Nov 2026 12:04:03 GMT
+< Content-Type: text/html
+Content-Type: text/html
+< Content-Length: 650
+Content-Length: 650
+< Connection: keep-alive
+Connection: keep-alive
+< Last-Modified: Sun, 08 Nov 2026 09:21:02 GMT
+Last-Modified: Sun, 08 Nov 2026 09:21:02 GMT
+< ETag: "6af03efe-28a"
+ETag: "6af03efe-28a"
+< Accept-Ranges: bytes
+Accept-Ranges: bytes
+< 
+
+* Connection #0 to host reactjs.devfou.site:443 left intact
+ubuntu@ip-172-31-35-240:/etc/nginx/conf.d$ curl -IL --connect-timeout 10 --max-time 20 http://reactjs.devfou.site
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 12:04:44 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Location: https://reactjs.devfou.site/
+
+HTTP/1.1 200 OK
+Server: nginx/1.28.3 (Ubuntu)
+Date: Sun, 08 Nov 2026 12:04:44 GMT
+Content-Type: text/html
+Content-Length: 650
+Connection: keep-alive
+Last-Modified: Sun, 08 Nov 2026 09:21:02 GMT
+ETag: "6af03efe-28a"
+Accept-Ranges: bytes
