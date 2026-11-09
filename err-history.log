@@ -344,3 +344,147 @@ vagrant@ubuntu-jammy:~/dockerfile-learning$ docker logs reactjs-container
  HTTP  10/26/2026 4:07:08 AM 172.19.0.1 HEAD /
  HTTP  10/26/2026 4:07:08 AM 172.19.0.1 Returned 200 in 94 ms
 vagrant@ubuntu-jammy:~/dockerfile-learning$ 
+
+ubuntu@ip-172-31-35-240:~$ cd dockerfile-learning/
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git add .
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git commit -m "wip: complete 2nd homework secure certificate https"
+[main ac324eb] wip: complete 2nd homework secure certificate https
+ Committer: Ubuntu <ubuntu@ip-172-31-35-240.ap-southeast-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 3 files changed, 496 insertions(+)
+ create mode 100644 history-certficateHTTPS.log
+ create mode 100644 note.log
+ create mode 100644 scripts/autoconfig.sh
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git fetch
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git pull origin 
+Already up to date.
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git push
+Missing or invalid credentials.
+Error: connect ECONNREFUSED /run/user/1000/vscode-git-9116bae591.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:2083:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '/run/user/1000/vscode-git-9116bae591.sock'
+}
+Missing or invalid credentials.
+Error: connect ECONNREFUSED /run/user/1000/vscode-git-9116bae591.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:2083:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '/run/user/1000/vscode-git-9116bae591.sock'
+}
+remote: No anonymous write access.
+fatal: Authentication failed for 'https://github.com/Longfou1900/dockerfile-learning.git/'
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git add .
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git commit -m " update gitignore"
+[main e22a7f6]  update gitignore
+ Committer: Ubuntu <ubuntu@ip-172-31-35-240.ap-southeast-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git branch
+* main
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git push origin main
+Missing or invalid credentials.
+Error: connect ECONNREFUSED /run/user/1000/vscode-git-9116bae591.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:2083:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '/run/user/1000/vscode-git-9116bae591.sock'
+}
+Missing or invalid credentials.
+Error: connect ECONNREFUSED /run/user/1000/vscode-git-9116bae591.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:2083:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '/run/user/1000/vscode-git-9116bae591.sock'
+}
+remote: No anonymous write access.
+fatal: Authentication failed for 'https://github.com/Longfou1900/dockerfile-learning.git/'
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git remote -v
+origin  https://github.com/Longfou1900/dockerfile-learning.git (fetch)
+origin  https://github.com/Longfou1900/dockerfile-learning.git (push)
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git config --show-origin --get-all credential.helper
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git config --global --unset-all credential.helper
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ env | grep -E 'GIT_ASKPASS|VSCODE_GIT'
+VSCODE_GIT_ASKPASS_NODE=/home/ubuntu/.vscode-server/cli/servers/Stable-2c33b50b16c472efe58357d1d2a8a5414bc23fbf/server/node
+GIT_ASKPASS=/home/ubuntu/.vscode-server/cli/servers/Stable-2c33b50b16c472efe58357d1d2a8a5414bc23fbf/server/extensions/git/dist/askpass.sh
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
+VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-9116bae591.sock
+VSCODE_GIT_ASKPASS_MAIN=/home/ubuntu/.vscode-server/cli/servers/Stable-2c33b50b16c472efe58357d1d2a8a5414bc23fbf/server/extensions/git/dist/askpass-main.js
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ git push -u origin main
+Missing or invalid credentials.
+Error: connect ECONNREFUSED /run/user/1000/vscode-git-9116bae591.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:2083:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '/run/user/1000/vscode-git-9116bae591.sock'
+}
+Missing or invalid credentials.
+Error: connect ECONNREFUSED /run/user/1000/vscode-git-9116bae591.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:2083:16) {
+  errno: -111,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '/run/user/1000/vscode-git-9116bae591.sock'
+}
+remote: No anonymous write access.
+fatal: Authentication failed for 'https://github.com/Longfou1900/dockerfile-learning.git/'
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ VSCODE_GIT_IPC_HANDLE=/run/user/1000/vscode-git-9116bae591.sock
+GIT_ASKPASS=.../askpass.sh
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ unset GIT_ASKPASS
+unset VSCODE_GIT_ASKPASS_NODE
+unset VSCODE_GIT_ASKPASS_MAIN
+unset VSCODE_GIT_ASKPASS_EXTRA_ARGS
+unset VSCODE_GIT_IPC_HANDLE
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ env | grep -E 'GIT_ASKPASS|VSCODE_GIT'
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ GIT_TERMINAL_PROMPT=1 git push -u origin main
+Username for 'https://github.com': Longfou1900
+Password for 'https://Longfou1900@github.com': 
+remote: Permission to Longfou1900/dockerfile-learning.git denied to Longfou1900.
+fatal: unable to access 'https://github.com/Longfou1900/dockerfile-learning.git/': The requested URL returned error: 403
+ubuntu@ip-172-31-35-240:~/dockerfile-learning$ GIT_TERMINAL_PROMPT=1 git push -u origin main
+Username for 'https://github.com': Longfou1900
+Password for 'https://Longfou1900@github.com': 
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (8/8), done.
+Writing objects: 100% (9/9), 6.67 KiB | 3.34 MiB/s, done.
+Total 9 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), completed with 2 local objects.
+To https://github.com/Longfou1900/dockerfile-learning.git
+   a104101..e22a7f6  main -> main
+branch 'main' set up to track 'origin/main'.
