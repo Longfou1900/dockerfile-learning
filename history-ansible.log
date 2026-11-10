@@ -1,0 +1,237 @@
+fou@pop-os:~/Documents/istad-ITE/gitlab/dockerfile-learning$ ansible-galaxy role search nginx
+Command 'ansible-galaxy' not found, but can be installed with:
+sudo apt install ansible-core
+fou@pop-os:~/Documents/istad-ITE/gitlab/dockerfile-learning$ sudo apt install ansible-core
+[sudo] password for fou: 
+Sorry, try again.
+[sudo] password for fou: 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  eog gettext gir1.2-peas-1.0 gnome-system-monitor libcairomm-1.16-1 libexempi8 libframe6 libgeis1 libglibmm-2.68-1t64 libgrail6 libgtkmm-4.0-0 libgtop-2.0-11 libgtop2-common libllvm19
+  libllvm19:i386 libpangomm-2.48-1t64 libpeas-1.0-0 libpeas-common libqt5xml5t64 libsigc++-3.0-0 libwoff1 nvidia-dkms-580-open nvidia-dkms-595-open nvidia-firmware-580-580.119.02
+  nvidia-firmware-580-580.178.04 nvidia-kernel-source-580-open nvidia-kernel-source-595-open touchegg webp-pixbuf-loader
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  ansible python-babel-localedata python3-argcomplete python3-babel python3-dnspython python3-jinja2 python3-jmespath python3-kerberos python3-libcloud python3-lockfile python3-markupsafe
+  python3-ntlm-auth python3-passlib python3-requests-ntlm python3-resolvelib python3-selinux python3-simplejson python3-tz python3-winrm python3-xmltodict
+Suggested packages:
+  cowsay python3-jsonschema sshpass python3-trio python3-aioquic python3-h2 python3-httpx python3-httpcore python-jinja2-doc python-lockfile-doc
+The following NEW packages will be installed:
+  ansible ansible-core python-babel-localedata python3-argcomplete python3-babel python3-dnspython python3-jinja2 python3-jmespath python3-kerberos python3-libcloud python3-lockfile
+  python3-markupsafe python3-ntlm-auth python3-passlib python3-requests-ntlm python3-resolvelib python3-selinux python3-simplejson python3-tz python3-winrm python3-xmltodict
+0 upgraded, 21 newly installed, 0 to remove and 52 not upgraded.
+Need to get 26.1 MB of archives.
+After this operation, 346 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://apt.pop-os.org/ubuntu noble/main amd64 python3-markupsafe amd64 2.1.5-1build2 [12.7 kB]
+Get:2 http://apt.pop-os.org/ubuntu noble-security/main amd64 python3-jinja2 all 3.1.2-1ubuntu1.3 [108 kB]
+Get:3 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-resolvelib all 1.0.1-1 [25.7 kB]
+Get:4 http://apt.pop-os.org/ubuntu noble/main amd64 python3-dnspython all 2.6.1-1ubuntu1 [163 kB]
+Get:5 http://apt.pop-os.org/ubuntu noble/universe amd64 ansible-core all 2.16.3-0ubuntu2 [1,280 kB]
+Get:6 http://apt.pop-os.org/ubuntu noble/universe amd64 ansible all 9.2.0+dfsg-0ubuntu5 [16.4 MB]                                                                                                    
+Get:7 http://apt.pop-os.org/ubuntu noble/main amd64 python-babel-localedata all 2.10.3-3build1 [6,357 kB]                                                                                            
+Get:8 http://apt.pop-os.org/ubuntu noble-updates/universe amd64 python3-argcomplete all 3.1.4-1ubuntu0.1 [33.8 kB]                                                                                   
+Get:9 http://apt.pop-os.org/ubuntu noble/main amd64 python3-tz all 2024.1-2 [31.4 kB]                                                                                                                
+Get:10 http://apt.pop-os.org/ubuntu noble/main amd64 python3-babel all 2.10.3-3build1 [87.5 kB]                                                                                                      
+Get:11 http://apt.pop-os.org/ubuntu noble/main amd64 python3-jmespath all 1.0.1-1 [21.3 kB]                                                                                                          
+Get:12 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-kerberos amd64 1.1.14-3.1build9 [21.2 kB]                                                                                           
+Get:13 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-lockfile all 1:0.12.2-3 [13.7 kB]                                                                                                   
+Get:14 http://apt.pop-os.org/ubuntu noble/main amd64 python3-simplejson amd64 3.19.2-1build2 [54.5 kB]                                                                                               
+Get:15 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-libcloud all 3.4.1-5 [751 kB]                                                                                                       
+Get:16 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-ntlm-auth all 1.5.0-1 [21.3 kB]                                                                                                     
+Get:17 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-requests-ntlm all 1.1.0-3 [6,308 B]                                                                                                 
+Get:18 http://apt.pop-os.org/ubuntu noble-updates/universe amd64 python3-selinux amd64 3.5-2ubuntu2.1 [165 kB]                                                                                       
+Get:19 http://apt.pop-os.org/ubuntu noble-security/main amd64 python3-xmltodict all 0.13.0-1ubuntu0.24.04.1 [14.3 kB]                                                                                
+Get:20 http://apt.pop-os.org/ubuntu noble/universe amd64 python3-winrm all 0.4.3-2 [31.9 kB]                                                                                                         
+Get:21 http://apt.pop-os.org/ubuntu noble/main amd64 python3-passlib all 1.7.4-4 [476 kB]                                                                                                            
+Fetched 26.1 MB in 1min 4s (409 kB/s)                                                                                                                                                                
+Selecting previously unselected package python3-markupsafe.
+(Reading database… 394536 files and directories currently installed.)
+Preparing to unpack …/00-python3-markupsafe_2.1.5-1build2_amd64.deb…
+Unpacking python3-markupsafe (2.1.5-1build2)…
+Selecting previously unselected package python3-jinja2.
+Preparing to unpack …/01-python3-jinja2_3.1.2-1ubuntu1.3_all.deb…
+Unpacking python3-jinja2 (3.1.2-1ubuntu1.3)…
+Selecting previously unselected package python3-resolvelib.
+Preparing to unpack …/02-python3-resolvelib_1.0.1-1_all.deb…
+Unpacking python3-resolvelib (1.0.1-1)…
+Selecting previously unselected package python3-dnspython.
+Preparing to unpack …/03-python3-dnspython_2.6.1-1ubuntu1_all.deb…
+Unpacking python3-dnspython (2.6.1-1ubuntu1)…
+Selecting previously unselected package ansible-core.
+Preparing to unpack …/04-ansible-core_2.16.3-0ubuntu2_all.deb…
+Unpacking ansible-core (2.16.3-0ubuntu2)…
+Selecting previously unselected package ansible.
+Preparing to unpack …/05-ansible_9.2.0+dfsg-0ubuntu5_all.deb…
+Unpacking ansible (9.2.0+dfsg-0ubuntu5)…
+Selecting previously unselected package python-babel-localedata.
+Preparing to unpack …/06-python-babel-localedata_2.10.3-3build1_all.deb…
+Unpacking python-babel-localedata (2.10.3-3build1)…
+Selecting previously unselected package python3-argcomplete.
+Preparing to unpack …/07-python3-argcomplete_3.1.4-1ubuntu0.1_all.deb…
+Unpacking python3-argcomplete (3.1.4-1ubuntu0.1)…
+Selecting previously unselected package python3-tz.
+Preparing to unpack …/08-python3-tz_2024.1-2_all.deb…
+Unpacking python3-tz (2024.1-2)…
+Selecting previously unselected package python3-babel.
+Preparing to unpack …/09-python3-babel_2.10.3-3build1_all.deb…
+Unpacking python3-babel (2.10.3-3build1)…
+Selecting previously unselected package python3-jmespath.
+Preparing to unpack …/10-python3-jmespath_1.0.1-1_all.deb…
+Unpacking python3-jmespath (1.0.1-1)…
+Selecting previously unselected package python3-kerberos.
+Preparing to unpack …/11-python3-kerberos_1.1.14-3.1build9_amd64.deb…
+Unpacking python3-kerberos (1.1.14-3.1build9)…
+Selecting previously unselected package python3-lockfile.
+Preparing to unpack …/12-python3-lockfile_1%3a0.12.2-3_all.deb…
+Unpacking python3-lockfile (1:0.12.2-3)…
+Selecting previously unselected package python3-simplejson.
+Preparing to unpack …/13-python3-simplejson_3.19.2-1build2_amd64.deb…
+Unpacking python3-simplejson (3.19.2-1build2)…
+Selecting previously unselected package python3-libcloud.
+Preparing to unpack …/14-python3-libcloud_3.4.1-5_all.deb…
+Unpacking python3-libcloud (3.4.1-5)…
+Selecting previously unselected package python3-ntlm-auth.
+Preparing to unpack …/15-python3-ntlm-auth_1.5.0-1_all.deb…
+Unpacking python3-ntlm-auth (1.5.0-1)…
+Selecting previously unselected package python3-requests-ntlm.
+Preparing to unpack …/16-python3-requests-ntlm_1.1.0-3_all.deb…
+Unpacking python3-requests-ntlm (1.1.0-3)…
+Selecting previously unselected package python3-selinux.
+Preparing to unpack …/17-python3-selinux_3.5-2ubuntu2.1_amd64.deb…
+Unpacking python3-selinux (3.5-2ubuntu2.1)…
+Selecting previously unselected package python3-xmltodict.
+Preparing to unpack …/18-python3-xmltodict_0.13.0-1ubuntu0.24.04.1_all.deb…
+Unpacking python3-xmltodict (0.13.0-1ubuntu0.24.04.1)…
+Selecting previously unselected package python3-winrm.
+Preparing to unpack …/19-python3-winrm_0.4.3-2_all.deb…
+Unpacking python3-winrm (0.4.3-2)…
+Selecting previously unselected package python3-passlib.
+Preparing to unpack …/20-python3-passlib_1.7.4-4_all.deb…
+Unpacking python3-passlib (1.7.4-4)…
+Setting up python3-lockfile (1:0.12.2-3)…
+Setting up python3-passlib (1.7.4-4)…
+Setting up python3-ntlm-auth (1.5.0-1)…
+Setting up python3-resolvelib (1.0.1-1)…
+Setting up python3-kerberos (1.1.14-3.1build9)…
+Setting up python3-markupsafe (2.1.5-1build2)…
+Setting up python3-tz (2024.1-2)…
+Setting up python-babel-localedata (2.10.3-3build1)…
+Setting up python3-simplejson (3.19.2-1build2)…
+Setting up python3-xmltodict (0.13.0-1ubuntu0.24.04.1)…
+Setting up python3-jinja2 (3.1.2-1ubuntu1.3)…
+Setting up python3-jmespath (1.0.1-1)…
+Setting up python3-dnspython (2.6.1-1ubuntu1)…
+Setting up python3-selinux (3.5-2ubuntu2.1)…
+Setting up python3-argcomplete (3.1.4-1ubuntu0.1)…
+Setting up python3-requests-ntlm (1.1.0-3)…
+Setting up python3-babel (2.10.3-3build1)…
+update-alternatives: using /usr/bin/pybabel-python3 to provide /usr/bin/pybabel (pybabel) in auto mode
+Setting up ansible-core (2.16.3-0ubuntu2)…
+Setting up python3-libcloud (3.4.1-5)…
+Setting up python3-winrm (0.4.3-2)…
+Setting up ansible (9.2.0+dfsg-0ubuntu5)…
+Processing triggers for man-db (2.12.0-4build2)…
+fou@pop-os:~/Documents/istad-ITE/gitlab/dockerfile-learning$ ansible-galaxy role search nginx
+
+Found 829 roles matching your search:
+
+ Name                                                Description
+ ----                                                -----------
+ 1davidmichael.ansible-role-nginx                    Nginx installation for Linux, FreeBSD and OpenBSD.
+ aadl.docker-nginx-alpine                            Ansible role to manage and run the alpine nginx docker container.
+ aaronpederson.nginx                                 nginx is an HTTP and reverse proxy server, a mail proxy server, and a generic TCP proxy server.
+ abtris.nginx-passenger                              Ansible: nginx-passenger role
+ acandid.nginx                                       Install Nginx and ssl and Create Vhost in Debian 10 and RHEL/CentOS 7
+ acez.nginx                                          Ansible role to setup a nginx container
+ adarnimrod.nginx                                    Install Nginx with common minimal configuration
+ adfinis-sygroup.nginx                               Install and configure nginx with virtualhosts
+ AdrianGPrado.coreos-nginx                           CoreOS Nginx configurable server
+ adzumatokaku.nginx_role                             your description
+ AerisCloud.nginx                                    Sets up nginx
+ afonsog.k8s_nginx_ingress                           Install nginx ingress on k8s
+ agios.nginx-unicorn                                 Nginx installation with Unicorn integration
+ ajilraju.nginx                                      Demo Nginx webserver simple roles.
+ alainvanhoof.alpine_nginx                           Nginx for Alpine Linux
+ alecunsolo.nginx                                    Install and configure and nginx instance
+ alexandrefimov.nginx_role                           your role description
+ alexlapinski.raspbian_nginx                         Setup base nginx
+ alikins.nginx                                       Nginx installation for Linux, FreeBSD and OpenBSD.
+ alivx.ansible_cis_nginx_hardening                   Nginx CIS
+ alonisser.fail2ban_nginx                            Ansible role that nginx specifc jails for fail2ban
+ alvistack.kube_ingress_nginx                        Ansible Role for NGINX Ingress Controller on Kubernetes Installation
+ alvistack.kubernetes_ingress_nginx                  Ansible Role for NGINX Ingress Controller on Kubernetes Installation
+ alvistack.nginx                                     Ansible Role for Nginx Installation
+ amaabca.nginx                                       Base Nginx Configuration for Ubuntu
+ amaudy.ansible_nginx                                your role description
+ aminvakil.nginx_initial                             Installs and Configures Nginx on Debian Buster
+ andrelohmann.prometheus_nginx_exporter              install nginx-prometheus-exporter
+ andyceo.nginx                                       Install nginx web server (nginx-naxsi), manage virtual hosts and settings for them
+ ansible.django-gulp-nginx                           Ansible Container Django demo
+ ansible.nginx-container                             nginx for Ansible Container
+ ansiblebit.nginx                                    Configure nginx
+ ansible-city.nginx                                  nginx instalation
+ ansibleguy.infra_nginx                              Role to configure a nginx webserver in one of three basic config modes: proxy, redirect, server
+ ansible-users.nginx                                 Install nginx from official release.
+ Anthony25.kubernetes_nginx_l4_lb                    Install nginx as a L4 load balancer on Kubernetes
+ antonchernik.nginx                                  Install nginx from nginx.org official repository
+ antongorkovenko.nginx                               Nginx server installation
+ antoniobarbaro.nginx                                Install nginx with fpm-php and essential module (mysql,..)
+ ANXS.nginx                                          Install and configure Nginx
+ arnobirchler.nginx                                  quick and easy account creater
+ arnobirchler.nginx-new-vhost                        quick and easy account creater
+ aruhier.kubernetes_nginx_l4_lb                      Install nginx as a L4 load balancer on Kubernetes
+ axelitus.nginx                                      An ansible role to provision Nginx in a server.
+ azavea.nginx                                        An Ansible role to install Nginx.
+ bas-ansible-roles-collection.nginx                  Installs and configures Nginx web-server
+:
+ AerisCloud.nginx                                    Sets up nginx
+ afonsog.k8s_nginx_ingress                           Install nginx ingress on k8s
+ agios.nginx-unicorn                                 Nginx installation with Unicorn integration
+ ajilraju.nginx                                      Demo Nginx webserver simple roles.
+ alainvanhoof.alpine_nginx                           Nginx for Alpine Linux
+ alecunsolo.nginx                                    Install and configure and nginx instance
+ alexandrefimov.nginx_role                           your role description
+ alexlapinski.raspbian_nginx                         Setup base nginx
+ alikins.nginx                                       Nginx installation for Linux, FreeBSD and OpenBSD.
+ alivx.ansible_cis_nginx_hardening                   Nginx CIS
+ alonisser.fail2ban_nginx                            Ansible role that nginx specifc jails for fail2ban
+ alvistack.kube_ingress_nginx                        Ansible Role for NGINX Ingress Controller on Kubernetes Installation
+ alvistack.kubernetes_ingress_nginx                  Ansible Role for NGINX Ingress Controller on Kubernetes Installation
+ alvistack.nginx                                     Ansible Role for Nginx Installation
+ amaabca.nginx                                       Base Nginx Configuration for Ubuntu
+ amaudy.ansible_nginx                                your role description
+ aminvakil.nginx_initial                             Installs and Configures Nginx on Debian Buster
+ andrelohmann.prometheus_nginx_exporter              install nginx-prometheus-exporter
+ andyceo.nginx                                       Install nginx web server (nginx-naxsi), manage virtual hosts and settings for them
+ ansible.django-gulp-nginx                           Ansible Container Django demo
+ ansible.nginx-container                             nginx for Ansible Container
+ ansiblebit.nginx                                    Configure nginx
+ ansible-city.nginx                                  nginx instalation
+ ansibleguy.infra_nginx                              Role to configure a nginx webserver in one of three basic config modes: proxy, redirect, server
+ ansible-users.nginx                                 Install nginx from official release.
+ Anthony25.kubernetes_nginx_l4_lb                    Install nginx as a L4 load balancer on Kubernetes
+ antonchernik.nginx                                  Install nginx from nginx.org official repository
+ antongorkovenko.nginx                               Nginx server installation
+ antoniobarbaro.nginx                                Install nginx with fpm-php and essential module (mysql,..)
+ ANXS.nginx                                          Install and configure Nginx
+ arnobirchler.nginx                                  quick and easy account creater
+ arnobirchler.nginx-new-vhost                        quick and easy account creater
+ aruhier.kubernetes_nginx_l4_lb                      Install nginx as a L4 load balancer on Kubernetes
+ axelitus.nginx                                      An ansible role to provision Nginx in a server.
+ azavea.nginx                                        An Ansible role to install Nginx.
+ bas-ansible-roles-collection.nginx                  Installs and configures Nginx web-server
+^C
+
+fou@pop-os:~/Documents/istad-ITE/gitlab/dockerfile-learning$ ansible-galaxy role search elasticsearch --author geerlingguy
+
+Found 2 roles matching your search:
+
+ Name                              Description
+ ----                              -----------
+ geerlingguy.elasticsearch         Elasticsearch for Linux.
+ geerlingguy.elasticsearch-curator Elasticsearch curator for Linux.
+fou@pop-os:~/Documents/istad-ITE/gitlab/dockerfile-learning$ ssh devops-ITE
+ssh: Could not resolve hostname devops-ite: Temporary failure in name resolutionj

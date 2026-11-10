@@ -796,3 +796,6 @@ docker run -dp 5432:5432 \
   --name postgres-cont \
   -e POSTGRES_PASSWORD=pass123 \
   
+
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git zsh
